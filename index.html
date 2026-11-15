@@ -3,35 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anik Shekhar Mazumder | Civil Engineer</title>
+    <title>Anik Shekhar Mazumder | Civil &amp; Structural Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio of Anik Shekhar Mazumder, Civil and Environmental Engineer. Structural calculations in Tekla Tedds, Building Regulations drawings in AutoCAD, structural inspection reports and quantity surveying in Bluebeam Revu for UK residential projects."
+    />
+    <meta name="theme-color" content="#08121c" />
+    <meta property="og:title" content="Anik Shekhar Mazumder | Civil &amp; Structural Engineer" />
+    <meta
+      property="og:description"
+      content="Structural design, Building Regulations drawings and quantity surveying for UK residential projects."
+    />
+    <meta property="og:image" content="assets/Aniruddha.jpeg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
     <style>
-      /* ─── CSS Variables ─────────────────────────────────── */
+      /* ─── CSS Variables: deep blueprint theme ────────────────── */
       :root {
-        --bg: #0b0e14;
-        --surface: #111620;
-        --surface2: #181e2e;
-        --border: rgba(255, 255, 255, 0.07);
-        --accent: #4fffb0;
-        --accent2: #3dd6f5;
-        --accent3: #b06fff;
-        --text: #e8edf5;
-        --text-sub: #8a96b0;
-        --text-dim: #4f5a72;
-        --glow: rgba(79, 255, 176, 0.18);
-        --glow2: rgba(61, 214, 245, 0.12);
-        --radius: 16px;
-        --radius-sm: 8px;
-        --font-head: "Syne", sans-serif;
-        --font-body: "DM Sans", sans-serif;
+        --bg: #08121c; /* deep ink navy */
+        --bg-deep: #060d15;
+        --surface: #0e1c2b;
+        --surface2: #13263a;
+        --paper: #ffffff; /* drawing sheets */
+        --line-rgb: 150, 178, 205; /* steel blue linework */
+        --accent-rgb: 200, 164, 92; /* survey brass */
+        --border: rgba(var(--line-rgb), 0.14);
+        --border-strong: rgba(var(--line-rgb), 0.28);
+        --accent: #c8a45c;
+        --accent-hi: #dcbc7a;
+        --accent2: #9db8d2; /* steel blue */
+        --accent3: #6f8aa6;
+        --text: #e8edf3;
+        --ink: #e8edf3;
+        --text-sub: #aab7c5;
+        --text-dim: #7d8c9c;
+        --radius: 6px;
+        --radius-sm: 3px;
+        --font-head: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --font-body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+        --nav-h: 68px;
       }
 
-      /* ─── Reset & Base ──────────────────────────────────── */
+      /* ─── Reset & Base ──────────────────────────────────────── */
       *,
       *::before,
       *::after {
@@ -42,104 +63,141 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: calc(var(--nav-h) + 16px);
+        background: var(--bg-deep);
       }
 
       body {
-        background: var(--bg);
+        background-color: var(--bg);
+        background-image:
+          radial-gradient(1200px 720px at 80% -12%, rgba(28, 58, 90, 0.5), transparent 70%),
+          linear-gradient(180deg, #0a1622 0%, #070f18 100%);
+        background-attachment: fixed;
         color: var(--text);
         font-family: var(--font-body);
         font-size: 16px;
         line-height: 1.7;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
       }
 
-      /* Subtle grid texture */
+      /* Drafting grid: fine squares with a heavier line every fifth */
       body::before {
         content: "";
         position: fixed;
         inset: 0;
         background-image:
-          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-          linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.015) 1px,
-            transparent 1px
-          );
-        background-size: 60px 60px;
+          linear-gradient(rgba(var(--line-rgb), 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(var(--line-rgb), 0.04) 1px, transparent 1px),
+          linear-gradient(rgba(var(--line-rgb), 0.022) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(var(--line-rgb), 0.022) 1px, transparent 1px);
+        background-size:
+          120px 120px,
+          120px 120px,
+          24px 24px,
+          24px 24px;
         pointer-events: none;
         z-index: 0;
       }
 
-      /* Ambient background orbs */
-      .orb {
+      /* 3D structural scene (drawn on canvas, sits behind all content) */
+      .ce-bg {
         position: fixed;
-        border-radius: 50%;
-        filter: blur(120px);
-        pointer-events: none;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         z-index: 0;
-        opacity: 0.25;
+        pointer-events: none;
+        transition: opacity 0.4s linear;
       }
-      .orb-1 {
-        width: 500px;
-        height: 500px;
-        background: var(--accent);
-        top: -150px;
-        left: -150px;
-      }
-      .orb-2 {
-        width: 400px;
-        height: 400px;
-        background: var(--accent2);
-        bottom: -100px;
-        right: -100px;
-      }
-      .orb-3 {
-        width: 300px;
-        height: 300px;
-        background: var(--accent3);
-        top: 50%;
-        left: 60%;
+      @media print {
+        .ce-bg {
+          display: none;
+        }
       }
 
-      /* ─── Navigation ─────────────────────────────────────── */
-      nav {
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: var(--accent);
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+      .icon {
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .wrap {
+        width: min(1200px, 100% - 10%);
+        margin-inline: auto;
+      }
+
+      /* ─── Navigation ─────────────────────────────────────────── */
+      .nav {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+        inset: 0 0 auto 0;
         z-index: 100;
-        padding: 0 5%;
+        height: var(--nav-h);
+        background: rgba(7, 15, 24, 0.9);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav .wrap {
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 68px;
-        background: rgba(11, 14, 20, 0.85);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border);
+        gap: 20px;
       }
-
-      .nav-logo {
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
         font-family: var(--font-head);
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--accent);
-        letter-spacing: 0.04em;
+        font-size: 0.98rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0.01em;
         text-decoration: none;
+        white-space: nowrap;
       }
-
+      .nav-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(var(--accent-rgb), 0.7);
+        display: grid;
+        place-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+      }
       .nav-links {
         display: flex;
+        align-items: center;
         gap: 2rem;
         list-style: none;
       }
-
       .nav-links a {
         color: var(--text-sub);
         text-decoration: none;
-        font-size: 0.875rem;
+        font-size: 0.86rem;
         font-weight: 500;
-        letter-spacing: 0.03em;
+        letter-spacing: 0.02em;
         transition: color 0.2s;
         position: relative;
       }
@@ -147,397 +205,339 @@
         content: "";
         position: absolute;
         left: 0;
-        bottom: -4px;
+        bottom: -6px;
         width: 0;
-        height: 2px;
+        height: 1px;
         background: var(--accent);
-        border-radius: 2px;
         transition: width 0.25s;
       }
-      .nav-links a:hover {
-        color: var(--accent);
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--text);
       }
-      .nav-links a:hover::after {
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
         width: 100%;
       }
-
-      .hamburger {
+      .nav-links .nav-cv {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0.45rem 0.95rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(var(--accent-rgb), 0.6);
+        color: var(--accent);
+        font-weight: 600;
+        transition: background 0.2s, color 0.2s;
+      }
+      .nav-links .nav-cv::after {
         display: none;
-        flex-direction: column;
-        gap: 5px;
-        cursor: pointer;
-        background: none;
-        border: none;
-        padding: 4px;
       }
-      .hamburger span {
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: var(--text);
-        border-radius: 2px;
-        transition: all 0.3s;
+      .nav-links .nav-cv:hover {
+        background: var(--accent);
+        color: #0a1420;
+      }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        color: var(--text);
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-size: 1.3rem;
+        place-items: center;
       }
 
-      /* ─── Layout Wrapper ─────────────────────────────────── */
-      main {
+      /* ─── Layout ─────────────────────────────────────────────── */
+      main,
+      footer {
         position: relative;
         z-index: 1;
-        padding-top: 68px;
       }
-
+      main {
+        overflow-x: clip;
+      }
       section {
-        padding: 100px 5%;
-        max-width: 1200px;
-        margin: 0 auto;
+        padding: 100px 0;
+      }
+      section + section {
+        border-top: 1px solid var(--border);
+      }
+      .band {
+        background: rgba(11, 23, 36, 0.78);
       }
 
-      .section-label {
-        font-family: var(--font-head);
-        font-size: 0.75rem;
-        font-weight: 600;
+      .sec-head {
+        margin-bottom: 3rem;
+        max-width: 760px;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 500;
         color: var(--accent);
-        letter-spacing: 0.2em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.9rem;
       }
-
-      .section-title {
-        font-family: var(--font-head);
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 800;
-        color: var(--text);
-        line-height: 1.15;
-        margin-bottom: 1.5rem;
-      }
-
-      .section-desc {
-        color: var(--text-sub);
-        font-size: 1.05rem;
-        max-width: 620px;
-        line-height: 1.8;
-      }
-
-      .divider {
-        width: 100%;
+      .eyebrow::after {
+        content: "";
+        width: 56px;
         height: 1px;
-        background: var(--border);
-        margin: 0 auto;
+        background: rgba(var(--accent-rgb), 0.45);
+      }
+      .eyebrow .icon {
+        font-size: 1rem;
+      }
+      h2 {
+        font-family: var(--font-head);
+        font-size: clamp(1.85rem, 3.4vw, 2.6rem);
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.18;
+        letter-spacing: -0.012em;
+        text-wrap: balance;
+      }
+      .sec-head p {
+        margin-top: 1.25rem;
+        color: var(--text-sub);
+        font-size: 1.03rem;
+        line-height: 1.8;
+        max-width: 640px;
       }
 
-      /* ─── Hero / Profile Section ─────────────────────────── */
-      #hero {
-        min-height: calc(100vh - 68px);
+      /* ─── Hero ───────────────────────────────────────────────── */
+      .hero {
+        position: relative;
+        padding-top: var(--nav-h);
+      }
+      .hero-grid {
+        min-height: calc(100vh - var(--nav-h) - 60px);
         display: flex;
         align-items: center;
         gap: 4rem;
-        padding-top: 120px;
-        padding-bottom: 100px;
+        padding: 70px 0 80px;
       }
-
       .hero-text {
         flex: 1;
         min-width: 0;
       }
-
-      .hero-greeting {
-        font-size: 0.875rem;
+      .hero-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
         color: var(--accent);
         font-weight: 500;
-        letter-spacing: 0.12em;
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        margin-bottom: 1rem;
+        margin-bottom: 1.1rem;
         display: flex;
         align-items: center;
-        gap: 0.6rem;
+        gap: 0.7rem;
       }
-      .hero-greeting::before {
+      .hero-eyebrow::before {
         content: "";
         display: inline-block;
-        width: 28px;
-        height: 2px;
+        width: 32px;
+        height: 1px;
         background: var(--accent);
-        border-radius: 2px;
       }
-
-      .hero-name {
+      .hero h1 {
         font-family: var(--font-head);
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
-        font-weight: 800;
-        color: var(--text);
-        line-height: 1.05;
-        margin-bottom: 0.5rem;
-      }
-
-      .hero-title {
-        font-family: var(--font-head);
-        font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+        font-size: clamp(2.1rem, 4.6vw, 3.6rem);
         font-weight: 600;
-        background: linear-gradient(135deg, var(--accent2), var(--accent));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 1.5rem;
+        color: var(--text);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.8rem;
       }
-
-      .hero-bio {
+      .hero-role {
+        font-family: var(--font-head);
+        font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+        font-weight: 500;
+        color: var(--accent);
+        width: fit-content;
+      }
+      .hero-tags {
+        margin-top: 0.4rem;
+        color: var(--text-dim);
+        font-size: 0.95rem;
+      }
+      .hero-summary {
+        margin-top: 1.5rem;
         color: var(--text-sub);
-        font-size: 1.05rem;
-        max-width: 520px;
+        font-size: 1.03rem;
+        max-width: 560px;
         line-height: 1.85;
-        margin-bottom: 2.5rem;
       }
-
+      .hero-summary strong {
+        color: var(--text);
+        font-weight: 500;
+      }
       .hero-badges {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.6rem;
-        margin-bottom: 2.5rem;
+        gap: 0.5rem;
+        margin-top: 1.75rem;
       }
-
       .badge {
-        padding: 0.35rem 0.85rem;
-        border-radius: 100px;
-        font-size: 0.78rem;
+        padding: 0.32rem 0.7rem;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
         font-weight: 500;
         letter-spacing: 0.04em;
-        border: 1px solid;
-      }
-      .badge-green {
-        border-color: rgba(79, 255, 176, 0.3);
-        color: var(--accent);
-        background: rgba(79, 255, 176, 0.07);
-      }
-      .badge-blue {
-        border-color: rgba(61, 214, 245, 0.3);
+        border: 1px solid var(--border-strong);
         color: var(--accent2);
-        background: rgba(61, 214, 245, 0.07);
+        background: rgba(var(--line-rgb), 0.05);
       }
-      .badge-purple {
-        border-color: rgba(176, 111, 255, 0.3);
-        color: var(--accent3);
-        background: rgba(176, 111, 255, 0.07);
+      .badge-teal {
+        border-color: rgba(var(--accent-rgb), 0.45);
+        color: var(--accent);
+        background: rgba(var(--accent-rgb), 0.07);
       }
-
       .hero-cta {
         display: flex;
         flex-wrap: wrap;
-        gap: 1rem;
+        gap: 0.9rem;
+        margin-top: 2.25rem;
       }
-
       .btn {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.8rem 1.8rem;
-        border-radius: 100px;
+        gap: 0.55rem;
+        padding: 0.8rem 1.6rem;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-body);
         font-size: 0.9rem;
         font-weight: 600;
         text-decoration: none;
         cursor: pointer;
-        transition: all 0.25s;
-        font-family: var(--font-body);
-        border: none;
-        letter-spacing: 0.03em;
+        transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+        border: 1px solid transparent;
+        letter-spacing: 0.02em;
       }
-
       .btn-primary {
         background: var(--accent);
-        color: #080b10;
-        box-shadow: 0 0 30px rgba(79, 255, 176, 0.3);
+        color: #0a1420;
       }
       .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0 45px rgba(79, 255, 176, 0.5);
+        background: var(--accent-hi);
+        transform: translateY(-1px);
       }
-
-      .btn-ghost {
-        background: transparent;
+      .btn-outline {
+        background: rgba(8, 18, 28, 0.6);
         color: var(--text);
-        border: 1px solid var(--border);
+        border-color: var(--border-strong);
       }
-      .btn-ghost:hover {
-        border-color: rgba(255, 255, 255, 0.2);
-        background: rgba(255, 255, 255, 0.04);
-        transform: translateY(-2px);
+      .btn-outline:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-1px);
       }
 
-      /* ─── Profile Image with Animations ─────────────────── */
+      /* Portrait set out like a drawing sheet, with a slight 3D parallax */
       .hero-visual {
         flex-shrink: 0;
-        width: 380px;
-        height: 380px;
+        width: 300px;
         position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        perspective: 1100px;
       }
-
-      /* Outer slow-rotating ring */
-      .ring-outer {
+      .hero-visual-inner {
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.35s ease-out;
+      }
+      .sheet-plate {
         position: absolute;
-        inset: -20px;
-        border-radius: 50%;
-        border: 1.5px dashed rgba(79, 255, 176, 0.3);
-        animation: spin-slow 18s linear infinite;
+        inset: 0;
+        border: 1px solid rgba(var(--accent-rgb), 0.4);
+        border-radius: var(--radius);
+        transform: translate3d(16px, 16px, -46px);
       }
-      /* Dots on outer ring */
-      .ring-outer::before,
-      .ring-outer::after {
-        content: "";
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--accent);
-        box-shadow: 0 0 12px var(--accent);
-        top: 50%;
-        left: -5px;
-        transform: translateY(-50%);
+      .sheet {
+        position: relative;
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 34px 70px rgba(0, 0, 0, 0.55);
       }
-      .ring-outer::after {
-        left: auto;
-        right: -5px;
-        background: var(--accent2);
-        box-shadow: 0 0 12px var(--accent2);
+      .portrait {
+        display: block;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        background: var(--surface2);
       }
-
-      /* Middle counter-rotating ring */
-      .ring-mid {
-        position: absolute;
-        inset: -8px;
-        border-radius: 50%;
-        border: 1px solid transparent;
-        background:
-          linear-gradient(var(--bg), var(--bg)) padding-box,
-          linear-gradient(135deg, var(--accent), transparent, var(--accent2))
-            border-box;
-        animation: spin-mid 10s linear infinite reverse;
-      }
-
-      /* Glow pulse behind image */
-      .img-glow {
-        position: absolute;
-        inset: 10px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(79, 255, 176, 0.15) 0%,
-          transparent 70%
-        );
-        animation: pulse-glow 3s ease-in-out infinite;
-      }
-
-      /* Floating geometric shapes */
-      .float-shape {
-        position: absolute;
-        border-radius: 50%;
-        animation: float-anim 6s ease-in-out infinite;
-      }
-      .shape-1 {
-        width: 14px;
-        height: 14px;
-        background: var(--accent);
-        box-shadow: 0 0 16px var(--accent);
-        top: 8%;
-        right: 6%;
-        animation-delay: 0s;
-      }
-      .shape-2 {
-        width: 9px;
-        height: 9px;
-        background: var(--accent2);
-        box-shadow: 0 0 12px var(--accent2);
-        bottom: 12%;
-        left: 4%;
-        animation-delay: -2s;
-      }
-      .shape-3 {
-        width: 7px;
-        height: 7px;
-        background: var(--accent3);
-        box-shadow: 0 0 10px var(--accent3);
-        top: 30%;
-        left: -2%;
-        animation-delay: -4s;
-      }
-      .shape-4 {
-        width: 5px;
-        height: 5px;
-        background: var(--accent);
-        box-shadow: 0 0 8px var(--accent);
-        bottom: 30%;
-        right: 0%;
-        animation-delay: -1s;
-      }
-
-      /* Actual profile image */
       .profile-img {
         width: 100%;
         height: 100%;
-        border-radius: 50%;
         object-fit: cover;
-        position: relative;
-        z-index: 2;
-        border: 3px solid rgba(79, 255, 176, 0.25);
-        background: var(--surface);
+        object-position: 50% 10%;
+        transform: scale(1.7);
+        transform-origin: 52% 14%;
+        filter: saturate(0.88);
+      }
+      .title-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid var(--border-strong);
+        font-family: var(--font-mono);
+      }
+      .title-block > div {
+        padding: 0.55rem 0.7rem 0.6rem;
+        min-width: 0;
+      }
+      .title-block > div + div {
+        border-left: 1px solid var(--border-strong);
+      }
+      .title-block small {
+        display: block;
+        font-size: 0.56rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+      }
+      .title-block b {
+        display: block;
+        font-size: 0.66rem;
+        font-weight: 500;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      /* corner registration marks float in front of the sheet */
+      .sheet-mark {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        border: solid var(--accent);
+        border-width: 0;
+        transform: translateZ(34px);
+        pointer-events: none;
+      }
+      .sheet-mark.tl {
+        top: -9px;
+        left: -9px;
+        border-top-width: 1.5px;
+        border-left-width: 1.5px;
+      }
+      .sheet-mark.br {
+        bottom: -9px;
+        right: -9px;
+        border-bottom-width: 1.5px;
+        border-right-width: 1.5px;
       }
 
-      /* Placeholder when no image */
-      .profile-placeholder {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--surface2), var(--surface));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: var(--font-head);
-        font-size: 5rem;
-        font-weight: 800;
-        color: var(--accent);
-        position: relative;
-        z-index: 2;
-        border: 3px solid rgba(79, 255, 176, 0.2);
-        letter-spacing: -0.02em;
-        text-shadow: 0 0 40px rgba(79, 255, 176, 0.4);
-      }
-
-      /* Animations */
-      @keyframes spin-slow {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes spin-mid {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      @keyframes pulse-glow {
-        0%,
-        100% {
-          opacity: 0.6;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.05);
-        }
-      }
-      @keyframes float-anim {
-        0%,
-        100% {
-          transform: translateY(0) scale(1);
-        }
-        50% {
-          transform: translateY(-14px) scale(1.15);
-        }
-      }
       @keyframes fade-up {
         from {
           opacity: 0;
-          transform: translateY(28px);
+          transform: translateY(16px);
         }
         to {
           opacity: 1;
@@ -552,1984 +552,2410 @@
           opacity: 1;
         }
       }
-
       .hero-text > * {
         animation: fade-up 0.7s ease both;
       }
-      .hero-greeting {
-        animation-delay: 0.1s;
-      }
-      .hero-name {
-        animation-delay: 0.2s;
-      }
-      .hero-title {
-        animation-delay: 0.3s;
-      }
-      .hero-bio {
-        animation-delay: 0.4s;
-      }
-      .hero-badges {
-        animation-delay: 0.5s;
-      }
-      .hero-cta {
-        animation-delay: 0.6s;
-      }
+      .hero-text > :nth-child(1) { animation-delay: 0.1s; }
+      .hero-text > :nth-child(2) { animation-delay: 0.2s; }
+      .hero-text > :nth-child(3) { animation-delay: 0.3s; }
+      .hero-text > :nth-child(4) { animation-delay: 0.35s; }
+      .hero-text > :nth-child(5) { animation-delay: 0.4s; }
+      .hero-text > :nth-child(6) { animation-delay: 0.5s; }
+      .hero-text > :nth-child(7) { animation-delay: 0.6s; }
       .hero-visual {
         animation: fade-in 1s ease 0.3s both;
       }
 
-      /* ─── Stats Bar ──────────────────────────────────────── */
-      .stats-bar {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        overflow: hidden;
-        margin-bottom: 80px;
+      .hero-meta ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 34px;
+        padding: 0 0 34px;
+        font-size: 0.86rem;
+        color: var(--text-sub);
+      }
+      .hero-meta li {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .hero-meta .icon {
+        color: var(--accent);
+        font-size: 1.05rem;
+      }
+      .hero-meta a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .hero-meta a:hover {
+        color: var(--accent);
       }
 
-      .stat-item {
-        padding: 2rem 1.5rem;
-        text-align: center;
+      /* ─── Stats bar ──────────────────────────────────────────── */
+      section.numbers {
+        padding: 0 0 80px;
+        border-top: none;
+      }
+      .numbers-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-top: 1px solid rgba(var(--accent-rgb), 0.55);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      }
+      .number {
+        padding: 1.9rem 1.5rem;
+        text-align: left;
         border-right: 1px solid var(--border);
         transition: background 0.2s;
       }
-      .stat-item:last-child {
+      .number:last-child {
         border-right: none;
       }
-      .stat-item:hover {
+      .number:hover {
         background: var(--surface2);
       }
-
-      .stat-number {
-        font-family: var(--font-head);
-        font-size: 2rem;
-        font-weight: 800;
+      .number b {
+        font-family: var(--font-mono);
+        font-size: 2.1rem;
+        font-weight: 500;
         color: var(--accent);
         display: block;
         line-height: 1;
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.6rem;
+        font-variant-numeric: tabular-nums;
       }
-
-      .stat-label {
-        font-size: 0.8rem;
+      .number b::before {
+        content: "0";
+        opacity: 0.35;
+      }
+      .number span {
+        display: block;
+        font-size: 0.82rem;
         color: var(--text-sub);
-        font-weight: 400;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
+        line-height: 1.45;
       }
-
-      /* ─── About ──────────────────────────────────────────── */
-      #about .about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: start;
-        margin-top: 3rem;
-      }
-
-      .about-text p {
-        color: var(--text-sub);
-        font-size: 1rem;
-        line-height: 1.85;
-        margin-bottom: 1.25rem;
-      }
-      .about-text p strong {
-        color: var(--text);
-        font-weight: 500;
-      }
-
-      .about-details {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .detail-row {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        padding: 1rem 1.25rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        transition:
-          border-color 0.2s,
-          background 0.2s;
-      }
-      .detail-row:hover {
-        border-color: rgba(79, 255, 176, 0.25);
-        background: var(--surface2);
-      }
-
-      .detail-icon {
-        font-size: 1.2rem;
-        flex-shrink: 0;
-        margin-top: 2px;
-      }
-
-      .detail-info {
-        min-width: 0;
-      }
-      .detail-label {
+      .numbers-note {
+        margin-top: 14px;
+        font-family: var(--font-mono);
         font-size: 0.72rem;
+        letter-spacing: 0.04em;
         color: var(--text-dim);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-weight: 500;
-        margin-bottom: 0.2rem;
-      }
-      .detail-value {
-        font-size: 0.95rem;
-        color: var(--text);
-        font-weight: 400;
-      }
-      .detail-value a {
-        color: var(--accent2);
-        text-decoration: none;
-      }
-      .detail-value a:hover {
-        text-decoration: underline;
       }
 
-      /* ─── Skills ─────────────────────────────────────────── */
-      #skills .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-        margin-top: 3rem;
-      }
-
-      .skill-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1.75rem;
-        transition:
-          transform 0.25s,
-          border-color 0.25s,
-          box-shadow 0.25s;
+      /* ─── 3D tilt surfaces ───────────────────────────────────── */
+      .tilt {
         position: relative;
-        overflow: hidden;
+        transform-style: preserve-3d;
+        will-change: transform;
       }
-      .skill-card::before {
+      .tilt::after {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(
-          135deg,
-          transparent 60%,
-          rgba(79, 255, 176, 0.04)
-        );
+        border-radius: inherit;
+        background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(var(--line-rgb), 0.09), transparent 48%);
+        opacity: 0;
+        transition: opacity 0.25s;
         pointer-events: none;
+        z-index: 3;
       }
-      .skill-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(79, 255, 176, 0.25);
-        box-shadow:
-          0 16px 48px rgba(0, 0, 0, 0.3),
-          0 0 0 1px rgba(79, 255, 176, 0.1);
+      .tilt.tilting::after {
+        opacity: 1;
       }
-
-      .skill-card-icon {
-        font-size: 1.8rem;
-        margin-bottom: 0.9rem;
-        display: block;
+      .js .tilt.tilting {
+        transition: transform 0.12s ease-out, box-shadow 0.25s, border-color 0.25s, background 0.25s;
       }
 
-      .skill-card-title {
-        font-family: var(--font-head);
-        font-size: 1rem;
-        font-weight: 700;
+      /* ─── Work / services ────────────────────────────────────── */
+      .notice {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 2px solid var(--accent);
+        border-radius: var(--radius-sm);
+        padding: 14px 18px;
+        font-size: 0.9rem;
+        color: var(--text-sub);
+        margin-bottom: 2.5rem;
+      }
+      .notice .icon {
+        font-size: 1.15rem;
+        color: var(--accent);
+        margin-top: 4px;
+      }
+      .service-nav {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.1rem;
+        margin-bottom: 4rem;
+        perspective: 1200px;
+      }
+      .service-nav a {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        padding: 1.4rem 1.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        text-decoration: none;
         color: var(--text);
-        margin-bottom: 0.75rem;
+        font-family: var(--font-head);
+        font-weight: 600;
+        font-size: 0.98rem;
+        line-height: 1.3;
+        transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, background 0.25s;
+        overflow: hidden;
+      }
+      .service-nav a:hover {
+        border-color: rgba(var(--accent-rgb), 0.55);
+        background: var(--surface2);
+        box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
+      }
+      .service-nav .icon {
+        font-size: 1.7rem;
+        color: var(--accent);
       }
 
-      .skill-tags {
+      .service {
+        padding: 4rem 0;
+        border-top: 1px solid var(--border);
+      }
+      .service:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+      .service:last-of-type {
+        padding-bottom: 0;
+      }
+      .service-top {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 3rem;
+        align-items: start;
+      }
+      .service-num {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 2.3rem;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+      }
+      .service-num::after {
+        content: "/ 04";
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        color: var(--text-dim);
+      }
+      .service h3 {
+        font-family: var(--font-head);
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--text);
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        margin: 0.7rem 0 0.9rem;
+      }
+      .service-lead {
+        color: var(--text-sub);
+        margin-bottom: 1.4rem;
+        line-height: 1.8;
+      }
+      .deliver-title {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 0.7rem;
+      }
+      .deliver {
+        list-style: none;
+        display: grid;
+        gap: 0.6rem;
+        margin-bottom: 1.5rem;
+      }
+      .deliver li {
+        position: relative;
+        padding-left: 1.3rem;
+        font-size: 0.93rem;
+        line-height: 1.6;
+        color: var(--text-sub);
+      }
+      .deliver li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.62em;
+        width: 8px;
+        height: 1.5px;
+        background: var(--accent);
+      }
+      .chips {
         display: flex;
         flex-wrap: wrap;
         gap: 0.4rem;
       }
-
-      .skill-tag {
-        font-size: 0.73rem;
-        padding: 0.25rem 0.6rem;
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.05);
+      .chip {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        padding: 0.26rem 0.6rem;
+        border-radius: var(--radius-sm);
+        background: rgba(var(--line-rgb), 0.05);
         color: var(--text-sub);
-        border: 1px solid rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(var(--line-rgb), 0.16);
+        white-space: nowrap;
+      }
+      .chip.fill {
+        background: rgba(var(--accent-rgb), 0.08);
+        border-color: rgba(var(--accent-rgb), 0.4);
+        color: var(--accent);
       }
 
-      /* ─── Education ──────────────────────────────────────── */
-      #education .edu-timeline {
-        margin-top: 3rem;
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.1rem;
+        perspective: 1200px;
+      }
+      .shot {
+        display: block;
+        width: 100%;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        cursor: zoom-in;
+        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.38);
+        transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      }
+      .shot:hover {
+        border-color: rgba(var(--accent-rgb), 0.55);
+        box-shadow: 0 24px 56px rgba(0, 0, 0, 0.5);
+      }
+      .shot-img {
+        display: block;
+        aspect-ratio: 3 / 2;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      .shot-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        transition: transform 0.5s ease;
+      }
+      .shot:hover .shot-img img {
+        transform: scale(1.03);
+      }
+      .shot-cap {
+        display: block;
+        padding: 0.75rem 1rem 0.85rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.8rem;
+        line-height: 1.45;
+        color: var(--text-sub);
+      }
+      .shot-cap b {
+        display: block;
+        font-family: var(--font-head);
+        color: var(--text);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+      }
+
+      .projects {
+        margin-top: 2.25rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.4rem 1.75rem 0.6rem;
+      }
+      .projects h4 {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.6rem;
+      }
+      .project-list {
+        list-style: none;
+      }
+      .project-list li {
+        display: grid;
+        grid-template-columns: minmax(0, 4fr) minmax(0, 2.4fr) minmax(0, 7fr);
+        gap: 6px 24px;
+        padding: 0.85rem 0;
+        border-top: 1px solid var(--border);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      .project-list .p-name {
+        font-weight: 500;
+        color: var(--text);
+      }
+      .project-list .p-place {
+        color: var(--accent2);
+      }
+      .project-list .p-scope {
+        color: var(--text-sub);
+      }
+
+      .table-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-top: 1.25rem;
+      }
+      .table-card caption {
+        caption-side: top;
+        text-align: left;
+        padding: 0.7rem 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: rgba(var(--accent-rgb), 0.06);
+        border-bottom: 1px solid var(--border);
+      }
+      .table-scroll {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+      }
+      th,
+      td {
+        padding: 0.5rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+        color: var(--text-sub);
+      }
+      th {
+        font-family: var(--font-mono);
+        font-size: 0.64rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        font-weight: 500;
+      }
+      td:first-child {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        color: var(--text-dim);
+      }
+      td.desc {
+        white-space: normal;
+        min-width: 150px;
+        color: var(--text);
+      }
+      td.num,
+      th.num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      td.num {
+        font-family: var(--font-mono);
+        color: var(--accent);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* ─── Cards (experience, skills, research) ───────────────── */
+      .xp,
+      .card,
+      .research {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+        overflow: hidden;
+      }
+      .xp:hover,
+      .card:hover,
+      .research:hover {
+        border-color: rgba(var(--accent-rgb), 0.45);
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.4);
+      }
+      .xp {
+        padding: 2.25rem 2.5rem;
+        border-left: 2px solid var(--accent);
+      }
+      .xp:hover {
+        border-left-color: var(--accent);
+      }
+      .xp-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        align-items: baseline;
+      }
+      .xp h3 {
+        font-family: var(--font-head);
+        font-size: 1.35rem;
+        color: var(--text);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .xp-date {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--accent);
+        font-weight: 500;
+        background: rgba(var(--accent-rgb), 0.07);
+        border: 1px solid rgba(var(--accent-rgb), 0.35);
+        padding: 0.24rem 0.65rem;
+        border-radius: var(--radius-sm);
+        letter-spacing: 0.04em;
+      }
+      .xp-org {
+        color: var(--accent2);
+        font-weight: 500;
+        font-size: 1.02rem;
+        margin-top: 0.25rem;
+      }
+      .xp-sub {
+        color: var(--text-dim);
+        font-size: 0.88rem;
+        margin-bottom: 1.4rem;
+      }
+      .xp .deliver {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem 2.5rem;
+        margin-bottom: 0;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.1rem;
+        perspective: 1200px;
+      }
+      .card {
+        padding: 1.6rem 1.7rem;
+      }
+      .card h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-family: var(--font-head);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        padding-bottom: 0.9rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .card h3 .icon {
+        font-size: 1.35rem;
+        color: var(--accent);
+      }
+      .plain-list {
+        list-style: none;
+        display: grid;
+        gap: 0.5rem;
+      }
+      .plain-list li {
+        position: relative;
+        padding-left: 1.2rem;
+        font-size: 0.9rem;
+        color: var(--text-sub);
+      }
+      .plain-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 8px;
+        height: 1.5px;
+        background: var(--accent);
+      }
+      .skills-wide {
+        grid-column: 1 / -1;
+      }
+      .skills-sub {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem 1.75rem;
+      }
+      .skills-sub h4 {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--accent2);
+        margin-bottom: 0.55rem;
+      }
+
+      /* ─── Education timeline ─────────────────────────────────── */
+      .edu {
+        list-style: none;
         position: relative;
         padding-left: 2rem;
       }
-      .edu-timeline::before {
+      .edu::before {
         content: "";
         position: absolute;
         left: 0;
         top: 8px;
         bottom: 8px;
-        width: 2px;
-        background: linear-gradient(to bottom, var(--accent), transparent);
-        border-radius: 2px;
+        width: 1px;
+        background: var(--border-strong);
       }
-
-      .edu-item {
+      .edu li {
         position: relative;
-        margin-bottom: 2.5rem;
-        padding: 1.75rem 2rem;
+        display: grid;
+        grid-template-columns: 120px minmax(0, 1fr) auto;
+        gap: 8px 28px;
+        align-items: center;
+        margin-bottom: 1.1rem;
+        padding: 1.5rem 2rem;
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        transition: border-color 0.25s;
+        transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
       }
-      .edu-item::before {
+      .edu li:last-child {
+        margin-bottom: 0;
+      }
+      .edu li::before {
         content: "";
         position: absolute;
-        left: -2.5rem;
-        top: 1.75rem;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
+        left: calc(-2rem - 4px);
+        top: 50%;
+        margin-top: -4.5px;
+        width: 9px;
+        height: 9px;
+        background: var(--bg);
+        border: 1.5px solid var(--accent);
+      }
+      .edu li:hover {
+        border-color: rgba(var(--accent-rgb), 0.45);
+        transform: translateX(4px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+      }
+      .edu li:hover::before {
         background: var(--accent);
-        box-shadow: 0 0 12px var(--accent);
-        border: 2px solid var(--bg);
       }
-      .edu-item:hover {
-        border-color: rgba(79, 255, 176, 0.2);
+      .edu-years {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.02em;
       }
-
-      .edu-degree {
+      .edu h3 {
         font-family: var(--font-head);
         font-size: 1.05rem;
-        font-weight: 700;
+        font-weight: 600;
         color: var(--text);
-        margin-bottom: 0.35rem;
+        line-height: 1.35;
+        margin-bottom: 0.25rem;
       }
-
-      .edu-institution {
+      .edu-school {
         font-size: 0.9rem;
         color: var(--accent2);
         font-weight: 500;
-        margin-bottom: 0.2rem;
       }
-
-      .edu-meta {
+      .edu-place {
         font-size: 0.8rem;
         color: var(--text-dim);
-        margin-bottom: 0.75rem;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
       }
-
-      .edu-gpa {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.82rem;
-        color: var(--accent);
-        font-weight: 600;
-        background: rgba(79, 255, 176, 0.08);
-        border: 1px solid rgba(79, 255, 176, 0.2);
-        padding: 0.2rem 0.65rem;
-        border-radius: 100px;
+      .gpa {
+        text-align: center;
+        background: rgba(var(--accent-rgb), 0.06);
+        border: 1px solid rgba(var(--accent-rgb), 0.35);
+        padding: 0.4rem 0.9rem;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-mono);
       }
-
-      /* ─── Research / Project ─────────────────────────────── */
-      #research .research-card {
-        margin-top: 3rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 2.5rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .research-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-      }
-
-      .research-badge {
-        display: inline-block;
-        font-size: 0.72rem;
-        font-weight: 600;
-        padding: 0.25rem 0.8rem;
-        border-radius: 100px;
-        background: rgba(79, 255, 176, 0.1);
-        color: var(--accent);
-        border: 1px solid rgba(79, 255, 176, 0.25);
-        margin-bottom: 1.25rem;
-        letter-spacing: 0.07em;
+      .gpa small {
+        display: block;
+        font-size: 0.58rem;
+        letter-spacing: 0.18em;
+        color: var(--text-dim);
         text-transform: uppercase;
       }
+      .gpa b {
+        font-size: 0.88rem;
+        color: var(--accent);
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
 
-      .research-title {
+      /* ─── Research ───────────────────────────────────────────── */
+      .research {
+        display: grid;
+        grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+        gap: 2.25rem;
+        padding: 2.5rem;
+        border-top: 2px solid var(--accent);
+      }
+      .research:hover {
+        border-top-color: var(--accent);
+      }
+      .research h3 {
         font-family: var(--font-head);
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-size: 1.22rem;
         color: var(--text);
         line-height: 1.4;
-        margin-bottom: 0.75rem;
+        font-weight: 600;
+        margin: 1.1rem 0 1.1rem;
+        text-wrap: balance;
       }
-
-      .research-sub {
-        font-size: 0.85rem;
-        color: var(--text-sub);
-        margin-bottom: 2rem;
-      }
-
-      .research-bullets {
-        list-style: none;
+      .research-side {
+        border-left: 1px solid var(--border);
+        padding-left: 2rem;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 1.25rem;
+        align-content: start;
       }
-
-      .research-bullets li {
-        display: flex;
-        gap: 0.75rem;
-        align-items: flex-start;
-        font-size: 0.9rem;
+      .research-side h4 {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        font-weight: 500;
+        margin-bottom: 0.55rem;
+      }
+      .extras {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.1rem;
+        margin-top: 1.1rem;
+        perspective: 1200px;
+      }
+      .cert-meta {
+        font-size: 0.86rem;
         color: var(--text-sub);
-        line-height: 1.6;
+        margin-top: 0.4rem;
       }
-
-      .research-bullets li::before {
-        content: "▸";
-        color: var(--accent);
-        flex-shrink: 0;
-        margin-top: 2px;
-        font-size: 0.85rem;
-      }
-
-      /* ─── CV / Resume Section ────────────────────────────── */
-      #cv {
-        background: var(--surface);
-        border-top: 1px solid var(--border);
+      .lang-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 0.6rem 0;
         border-bottom: 1px solid var(--border);
       }
-
-      .cv-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 3rem;
-        flex-wrap: wrap;
+      .lang-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
       }
-
-      .cv-text .section-label {
-        margin-bottom: 0.5rem;
-      }
-      .cv-text .section-title {
-        margin-bottom: 0.75rem;
-        font-size: clamp(1.6rem, 3vw, 2.2rem);
-      }
-
-      .cv-text p {
-        color: var(--text-sub);
-        font-size: 1rem;
-        line-height: 1.8;
-        max-width: 480px;
-      }
-
-      .cv-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        flex-shrink: 0;
-      }
-
-      .btn-download {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.65rem;
-        padding: 1rem 2.25rem;
-        border-radius: 100px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        text-decoration: none;
-        background: linear-gradient(135deg, var(--accent), var(--accent2));
-        color: #080b10;
-        box-shadow: 0 0 35px rgba(79, 255, 176, 0.35);
-        transition: all 0.25s;
-        border: none;
-        cursor: pointer;
-        font-family: var(--font-body);
-      }
-      .btn-download:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 55px rgba(79, 255, 176, 0.5);
-      }
-      .btn-download svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      .cv-meta {
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-      .cv-meta-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.82rem;
-        color: var(--text-sub);
-      }
-      .cv-meta-item svg {
-        width: 14px;
-        height: 14px;
-        color: var(--accent);
-      }
-
-      /* ─── Certifications ─────────────────────────────────── */
-      #certifications .certs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 1.5rem;
-        margin-top: 3rem;
-      }
-
-      .cert-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        overflow: hidden;
-        transition:
-          transform 0.25s,
-          border-color 0.25s,
-          box-shadow 0.25s;
-        cursor: pointer;
-        position: relative;
-      }
-      .cert-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(61, 214, 245, 0.3);
-        box-shadow:
-          0 20px 60px rgba(0, 0, 0, 0.35),
-          0 0 0 1px rgba(61, 214, 245, 0.1);
-      }
-
-      .cert-thumbnail {
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(135deg, #0e1929, #162440);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .cert-thumbnail-inner {
-        width: 90%;
-        height: 85%;
-        background: white;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        color: #333;
-        text-align: center;
-        padding: 12px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        position: relative;
-        overflow: hidden;
-      }
-
-      /* Certificate preview styling */
-      .cert-preview-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-        width: 100%;
-      }
-      .cert-preview-title {
-        font-size: 0.6rem;
-        font-weight: 700;
-        color: #1a1a2e;
-        text-align: center;
-        line-height: 1.2;
-      }
-      .cert-preview-name {
-        font-size: 0.65rem;
-        font-style: italic;
-        color: #2d5a8e;
-        font-weight: 600;
-      }
-      .cert-preview-body {
-        font-size: 0.45rem;
-        color: #444;
-        text-align: center;
-        line-height: 1.4;
-      }
-      .cert-preview-seal {
-        display: flex;
-        gap: 6px;
-        align-items: center;
-        margin-top: 4px;
-      }
-      .cert-preview-seal-dot {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.35rem;
-        font-weight: 700;
-      }
-      .seal-blue {
-        background: #1a5276;
-        color: white;
-      }
-      .seal-green {
-        background: #1a8a3f;
-        color: white;
-      }
-      .seal-red {
-        background: #922b21;
-        color: white;
-      }
-
-      .cert-overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.25s;
-        backdrop-filter: blur(3px);
-      }
-      .cert-card:hover .cert-overlay {
-        opacity: 1;
-      }
-      .cert-overlay-text {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: white;
-        font-size: 0.85rem;
-        font-weight: 600;
-        background: rgba(61, 214, 245, 0.9);
-        padding: 0.5rem 1.25rem;
-        border-radius: 100px;
-      }
-
-      .cert-info {
-        padding: 1.25rem 1.5rem;
-      }
-
-      .cert-issuer {
-        font-size: 0.72rem;
-        color: var(--accent2);
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        margin-bottom: 0.4rem;
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-      }
-
-      .cert-name {
+      .lang-row b {
         font-family: var(--font-head);
-        font-size: 1rem;
-        font-weight: 700;
         color: var(--text);
-        margin-bottom: 0.5rem;
-        line-height: 1.35;
+        font-weight: 600;
       }
-
-      .cert-meta {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-      .cert-meta-item {
-        font-size: 0.78rem;
-        color: var(--text-sub);
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-      }
-      .cert-meta-item svg {
-        width: 12px;
-        height: 12px;
-      }
-
-      /* ─── Modal ──────────────────────────────────────────── */
-      .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        opacity: 0;
-        visibility: hidden;
-        transition:
-          opacity 0.3s,
-          visibility 0.3s;
-        backdrop-filter: blur(8px);
-      }
-      .modal-overlay.open {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .modal-box {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        max-width: 900px;
-        width: 100%;
-        max-height: 90vh;
-        overflow: hidden;
-        position: relative;
-        transform: scale(0.92);
-        transition: transform 0.3s;
-      }
-      .modal-overlay.open .modal-box {
-        transform: scale(1);
-      }
-
-      .modal-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid var(--border);
-        color: var(--text);
-        font-size: 1.2rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-        transition: background 0.2s;
-      }
-      .modal-close:hover {
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .modal-cert-img {
-        width: 100%;
-        height: auto;
+      .lang-row em {
         display: block;
-      }
-
-      /* Certificate image representation in modal */
-      .modal-cert-display {
-        width: 100%;
-        background: #f5f0e8;
-        padding: 40px;
-        min-height: 500px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: auto;
-      }
-
-      .modal-cert-inner {
-        max-width: 700px;
-        width: 100%;
-        border: 8px double #c49a3c;
-        border-radius: 4px;
-        padding: 40px;
-        background: white;
-        text-align: center;
-        position: relative;
-        box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
-      }
-
-      .modal-cert-inner .cert-logos {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        gap: 10px;
-      }
-      .cert-logo-placeholder {
-        background: #1a5276;
-        color: white;
-        font-size: 0.55rem;
-        font-weight: 700;
-        padding: 6px 10px;
-        border-radius: 4px;
-        text-align: center;
-        line-height: 1.3;
-      }
-      .cert-logo-placeholder.green {
-        background: #1a8a3f;
-      }
-      .cert-logo-placeholder.red {
-        background: #c0392b;
-      }
-
-      .modal-cert-heading {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #1a1a2e;
-        margin-bottom: 16px;
-      }
-      .modal-cert-name {
-        font-size: 2rem;
-        font-style: italic;
-        color: #2d5a8e;
-        font-weight: 700;
-        margin-bottom: 16px;
-        font-family: Georgia, serif;
-      }
-      .modal-cert-body {
-        font-size: 0.85rem;
-        color: #333;
-        line-height: 1.7;
-        margin-bottom: 24px;
-      }
-      .modal-cert-sigs {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: 20px;
-        border-top: 1px solid #ddd;
-        padding-top: 16px;
-        margin-top: 16px;
-      }
-      .modal-cert-sig {
-        text-align: center;
-        flex: 1;
-      }
-      .modal-cert-sig-line {
-        border-top: 1px solid #333;
-        margin-bottom: 6px;
-      }
-      .modal-cert-sig-role {
-        font-size: 0.7rem;
-        color: #555;
-        line-height: 1.4;
-      }
-      .modal-cert-serial {
-        font-size: 0.7rem;
-        color: #888;
-        margin-top: 20px;
-      }
-      .modal-cert-badge {
-        text-align: center;
-        font-size: 0.6rem;
-        font-weight: 700;
-        color: #1a5276;
-        border: 2px solid #1a5276;
-        padding: 8px 12px;
-        border-radius: 4px;
-        line-height: 1.4;
-      }
-
-      /* ─── Languages ──────────────────────────────────────── */
-      #languages .lang-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-        margin-top: 3rem;
-      }
-
-      .lang-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 1.75rem;
-        display: flex;
-        align-items: center;
-        gap: 1.25rem;
-        transition:
-          border-color 0.25s,
-          transform 0.25s;
-      }
-      .lang-card:hover {
-        border-color: rgba(79, 255, 176, 0.2);
-        transform: translateY(-3px);
-      }
-
-      .lang-flag {
-        font-size: 2.2rem;
-        flex-shrink: 0;
-      }
-
-      .lang-info {
-        min-width: 0;
-      }
-      .lang-name {
-        font-family: var(--font-head);
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 0.2rem;
-      }
-      .lang-level {
         font-size: 0.8rem;
+        font-style: normal;
         color: var(--text-sub);
-        margin-bottom: 0.6rem;
       }
-      .lang-bar {
-        height: 4px;
-        background: rgba(255, 255, 255, 0.07);
-        border-radius: 100px;
-        overflow: hidden;
+      .dots {
+        display: inline-flex;
+        gap: 4px;
       }
-      .lang-bar-fill {
-        height: 100%;
-        border-radius: 100px;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
+      .dots i {
+        width: 18px;
+        height: 5px;
+        background: rgba(var(--line-rgb), 0.16);
+      }
+      .dots i.on {
+        background: var(--accent);
       }
 
-      /* ─── Contact ────────────────────────────────────────── */
-      #contact .contact-grid {
+      /* ─── Contact ────────────────────────────────────────────── */
+      .contact-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-        margin-top: 3rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.1rem;
+        perspective: 1200px;
       }
-
       .contact-card {
         display: flex;
         align-items: center;
         gap: 1.25rem;
-        padding: 1.5rem 1.75rem;
+        padding: 1.4rem 1.6rem;
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         text-decoration: none;
-        transition: all 0.25s;
+        transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.25s;
         color: var(--text);
-      }
-      .contact-card:hover {
-        border-color: rgba(79, 255, 176, 0.25);
-        transform: translateY(-3px);
-        background: var(--surface2);
-      }
-
-      .contact-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
-        flex-shrink: 0;
-      }
-      .icon-email {
-        background: rgba(79, 255, 176, 0.1);
-      }
-      .icon-phone {
-        background: rgba(61, 214, 245, 0.1);
-      }
-      .icon-linkedin {
-        background: rgba(10, 102, 194, 0.2);
-      }
-      .icon-location {
-        background: rgba(176, 111, 255, 0.1);
-      }
-
-      .contact-info {
         min-width: 0;
       }
-      .contact-label {
-        font-size: 0.72rem;
-        color: var(--text-dim);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-weight: 500;
-        margin-bottom: 0.25rem;
+      a.contact-card:hover {
+        border-color: rgba(var(--accent-rgb), 0.55);
+        background: var(--surface2);
+        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.4);
       }
-      .contact-value {
-        font-size: 0.95rem;
-        color: var(--text);
-        font-weight: 500;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      /* ─── Footer ─────────────────────────────────────────── */
-      footer {
-        position: relative;
-        z-index: 1;
-        padding: 2.5rem 5%;
-        border-top: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .footer-copy {
-        font-size: 0.82rem;
-        color: var(--text-dim);
-      }
-      .footer-copy span {
+      .contact-card > .icon {
+        width: 46px;
+        height: 46px;
+        padding: 12px;
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(var(--accent-rgb), 0.4);
+        background: rgba(var(--accent-rgb), 0.06);
         color: var(--accent);
       }
-
-      .footer-links {
-        display: flex;
-        gap: 1.5rem;
+      .contact-card small {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
       }
-      .footer-links a {
-        font-size: 0.82rem;
+      .contact-card span {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 500;
+        overflow-wrap: anywhere;
+      }
+      .contact-cta {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+      }
+
+      footer {
+        padding: 2rem 0;
+        border-top: 1px solid var(--border);
+        background: rgba(6, 13, 21, 0.85);
+        font-family: var(--font-mono);
+        font-size: 0.74rem;
+        letter-spacing: 0.04em;
+        color: var(--text-dim);
+      }
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+      }
+      footer a {
         color: var(--text-dim);
         text-decoration: none;
         transition: color 0.2s;
       }
-      .footer-links a:hover {
+      footer a:hover {
         color: var(--accent);
       }
 
-      /* ─── Scroll Reveal ──────────────────────────────────── */
-      .reveal {
-        opacity: 0;
-        transform: translateY(30px);
-        transition:
-          opacity 0.7s ease,
-          transform 0.7s ease;
+      /* ─── Lightbox ───────────────────────────────────────────── */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(5, 11, 18, 0.96);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: none;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        padding: 14px 16px 18px;
       }
-      .reveal.visible {
+      .lightbox.open {
+        display: grid;
+      }
+      .lb-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--text-sub);
+        font-family: var(--font-mono);
+        font-size: 0.76rem;
+        letter-spacing: 0.03em;
+        padding-bottom: 10px;
+      }
+      .lb-btn {
+        background: var(--surface);
+        border: 1px solid var(--border-strong);
+        color: var(--text);
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-sm);
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+      }
+      .lb-btn:hover {
+        background: var(--accent);
+        color: #0a1420;
+        border-color: var(--accent);
+      }
+      .lb-stage {
+        position: relative;
+        min-height: 0;
+        overflow: hidden;
+      }
+      .lb-stage img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .lb-foot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding-top: 12px;
+        color: var(--text);
+        font-size: 0.93rem;
+        text-align: center;
+      }
+      .lb-foot p {
+        max-width: 70ch;
+      }
+
+      /* ─── Sample protection ──────────────────────────────────── */
+      .shot,
+      .lightbox {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      .shot-img img,
+      .lb-stage img {
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+        pointer-events: none;
+      }
+      .lb-stage::after {
+        /* shield: clicks and long-presses land here, not on the image */
+        content: "";
+        position: absolute;
+        inset: 0;
+      }
+      @media print {
+        .gallery,
+        .lightbox,
+        .table-card {
+          display: none !important;
+        }
+      }
+
+      /* ─── Scroll reveal ──────────────────────────────────────── */
+      .js .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.25s, box-shadow 0.25s;
+      }
+      .js .reveal.visible {
         opacity: 1;
         transform: translateY(0);
       }
-      .reveal-delay-1 {
-        transition-delay: 0.1s;
-      }
-      .reveal-delay-2 {
-        transition-delay: 0.2s;
-      }
-      .reveal-delay-3 {
-        transition-delay: 0.3s;
-      }
-      .reveal-delay-4 {
-        transition-delay: 0.4s;
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+        }
+        .js .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
       }
 
-      /* ─── Mobile Responsive ──────────────────────────────── */
-      @media (max-width: 900px) {
-        #hero {
-          flex-direction: column-reverse;
-          text-align: center;
-          padding-top: 80px;
-          gap: 3rem;
+      /* ─── Responsive ─────────────────────────────────────────── */
+      @media (max-width: 980px) {
+        .service-top,
+        .research {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 1.75rem;
         }
-        .hero-greeting {
-          justify-content: center;
+        .research-side {
+          border-left: none;
+          padding-left: 0;
+          border-top: 1px solid var(--border);
+          padding-top: 1.4rem;
         }
-        .hero-bio {
-          margin: 0 auto 2.5rem;
+        .service-nav,
+        .skills-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
-        .hero-badges {
-          justify-content: center;
-        }
-        .hero-cta {
-          justify-content: center;
-        }
-        .hero-visual {
-          width: 280px;
-          height: 280px;
-        }
-
-        .stats-bar {
+        .numbers-grid {
           grid-template-columns: repeat(2, 1fr);
         }
-        .stat-item:nth-child(2) {
+        .number:nth-child(2) {
           border-right: none;
         }
-        .stat-item:nth-child(3) {
+        .number:nth-child(n + 3) {
           border-top: 1px solid var(--border);
         }
-
-        #about .about-grid {
-          grid-template-columns: 1fr;
-          gap: 2.5rem;
+        .project-list li {
+          grid-template-columns: minmax(0, 1fr) auto;
         }
-        #skills .skills-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .research-bullets {
-          grid-template-columns: 1fr;
-        }
-        .cv-inner {
-          flex-direction: column;
-        }
-        #languages .lang-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        #contact .contact-grid {
-          grid-template-columns: 1fr;
+        .project-list .p-scope {
+          grid-column: 1 / -1;
         }
       }
-
-      @media (max-width: 600px) {
-        section {
-          padding: 70px 5%;
+      @media (max-width: 900px) {
+        .hero-grid {
+          flex-direction: column-reverse;
+          text-align: center;
+          gap: 3rem;
+          padding-top: 56px;
+          min-height: 0;
         }
-        nav {
-          padding: 0 4%;
+        .hero-eyebrow,
+        .hero-badges,
+        .hero-cta,
+        .hero-meta ul {
+          justify-content: center;
+        }
+        .hero-role,
+        .hero-summary {
+          margin-inline: auto;
+        }
+        .hero-visual {
+          width: 240px;
+        }
+        .title-block {
+          text-align: left;
+          grid-template-columns: 1fr;
+        }
+        .title-block > div + div {
+          display: none;
+        }
+        .nav-toggle {
+          display: grid;
         }
         .nav-links {
           display: none;
+          position: absolute;
+          top: var(--nav-h);
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          background: rgba(7, 15, 24, 0.98);
+          border-bottom: 1px solid var(--border);
+          padding: 0.5rem 5% 1.25rem;
         }
-        .hamburger {
+        .nav-links.open {
           display: flex;
         }
-
-        .stats-bar {
-          grid-template-columns: 1fr 1fr;
+        .nav-links a {
+          display: block;
+          padding: 0.8rem 0;
+          font-size: 1rem;
+          border-bottom: 1px solid var(--border);
         }
-        #skills .skills-grid {
-          grid-template-columns: 1fr;
+        .nav-links a::after {
+          display: none;
         }
-        #languages .lang-grid {
-          grid-template-columns: 1fr;
+        .nav-links .nav-cv {
+          display: inline-flex;
+          margin-top: 1rem;
+          padding: 0.6rem 1.2rem;
+          border: 1px solid rgba(var(--accent-rgb), 0.6);
+        }
+        .xp .deliver,
+        .extras,
+        .contact-grid,
+        .skills-sub {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .edu li {
+          grid-template-columns: minmax(0, 1fr) auto;
+        }
+        .edu-years {
+          grid-column: 1 / -1;
+        }
+        .xp,
+        .research {
+          padding: 1.6rem 1.4rem;
+        }
+      }
+      @media (max-width: 600px) {
+        section {
+          padding: 70px 0;
+        }
+        .gallery,
+        .skills-grid,
+        .service-nav {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .project-list li {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .projects {
+          padding: 1.2rem 1.1rem 0.4rem;
         }
         .hero-visual {
-          width: 230px;
-          height: 230px;
+          width: 210px;
         }
-        footer {
-          flex-direction: column;
-          align-items: flex-start;
+        .edu {
+          padding-left: 1.4rem;
         }
-      }
-
-      /* Mobile nav open */
-      .nav-links.open {
-        display: flex !important;
-        flex-direction: column;
-        position: fixed;
-        top: 68px;
-        left: 0;
-        right: 0;
-        background: rgba(11, 14, 20, 0.97);
-        backdrop-filter: blur(16px);
-        padding: 2rem;
-        gap: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        z-index: 99;
-      }
-      .nav-links.open a {
-        font-size: 1rem;
+        .edu li {
+          padding: 1.2rem 1.1rem;
+        }
+        .edu li::before {
+          left: calc(-1.4rem - 4px);
+        }
+        .number {
+          padding: 1.3rem 1rem;
+        }
+        .number b {
+          font-size: 1.7rem;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Ambient Orbs -->
-    <div class="orb orb-1" aria-hidden="true"></div>
-    <div class="orb orb-2" aria-hidden="true"></div>
-    <div class="orb orb-3" aria-hidden="true"></div>
+    <!-- SVG icon sprite -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none" aria-hidden="true">
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16" /></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7" /></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.800 7 11 7 11z" /><circle cx="12" cy="10" r="2.5" /></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18" /></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4M16 3v4M3 10h18" /></symbol>
+      <symbol id="i-beam" viewBox="0 0 24 24"><path d="M5 4h14M5 20h14M12 4v16M8 4v2M16 4v2M8 18v2M16 18v2" /></symbol>
+      <symbol id="i-plan" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1.5" /><path d="M3 10h8v11M11 14h4M15 3v7h6" /></symbol>
+      <symbol id="i-report" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" /><path d="M15 3v4h4M9 12h6M9 16h4" /><circle cx="16" cy="16.500" r="0.500" /></symbol>
+      <symbol id="i-measure" viewBox="0 0 24 24"><path d="M3 17L17 3l4 4L7 21z" /><path d="M7.500 12.500l2 2M10.500 9.500l2 2M13.500 6.500l2 2" /></symbol>
+      <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z" /><path d="M6 11.500V16c0 1.500 3 3 6 3s6-1.500 6-3v-4.500M22 9v5" /></symbol>
+      <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.800 3h10.400a2 2 0 0 0 1.800-3l-5-9V3M7.500 15h9" /></symbol>
+      <symbol id="i-helmet" viewBox="0 0 24 24"><path d="M3 18h18M5 18v-3a7 7 0 0 1 14 0v3M10 8V5h4v3" /></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></symbol>
+      <symbol id="i-tools" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" /></symbol>
+      <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6" /><path d="M8.500 14l-1.500 7 5-3 5 3-1.500-7" /></symbol>
+    </svg>
 
-    <!-- Navigation -->
-    <nav>
-      <a href="#hero" class="nav-logo">Home</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#cv">CV</a></li>
-        <li><a href="#certifications">Certifications</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
+    <!-- 3D structural scene (background) -->
+    <canvas class="ce-bg" id="ceBg" aria-hidden="true"></canvas>
 
-    <main>
-      <!-- ─── HERO ─────────────────────────────────────────── -->
-      <section id="hero">
-        <div class="hero-text">
-          <div class="hero-greeting">Hello, I'm</div>
-          <h1 class="hero-name">Anik Shekhar<br />Mazumder</h1>
-          <div class="hero-title">Civil & Environmental Engineer</div>
-          <p class="hero-bio">
-            Final-semester engineering student at SUST with a strong foundation
-            in structural design, GIS-based spatial analysis, and life cycle
-            assessment. Passionate about building
-            <strong>sustainable infrastructure</strong> and solving real-world
-            environmental challenges.
-          </p>
-          <div class="hero-badges">
-            <span class="badge badge-green">GIS & ArcGIS Pro</span>
-            <span class="badge badge-blue">ETABS · AutoCAD</span>
-            <span class="badge badge-purple">Python · LCA</span>
-            <span class="badge badge-green">Sustainability</span>
-            <span class="badge badge-blue">Front-End Dev</span>
-          </div>
-          <div class="hero-cta">
-            <a href="#cv" class="btn btn-primary">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-              >
-                <path
-                  d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
-                />
-              </svg>
-              Download CV
+    <!-- ─── Navigation ─────────────────────────────────────────── -->
+    <header class="nav">
+      <div class="wrap">
+        <a href="#top" class="nav-brand" aria-label="Anik Shekhar Mazumder, back to top">
+          <span class="nav-mark">ASM</span>
+          <span>Anik Shekhar Mazumder</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+          &#9776;
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a class="nav-cv" href="Anik_Shekhar_Mazumder_CV.pdf" download>
+              <svg class="icon"><use href="#i-download" /></svg>CV
             </a>
-            <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ─── Hero ─────────────────────────────────────────────── -->
+      <div class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-text">
+            <div class="hero-eyebrow">Hello, I'm</div>
+            <h1>Anik Shekhar<br />Mazumder</h1>
+            <p class="hero-role">Civil &amp; Environmental Engineer</p>
+            <p class="hero-tags">Structural Design &bull; Quantity Surveying &bull; Python &amp; Web Development</p>
+            <p class="hero-summary">
+              Civil and Structural Engineer working as an
+              <strong>Associate Civil Engineer at Cube In Cloud</strong> on UK residential projects for A2Z
+              Structural Engineering, an England-based consultancy. I prepare
+              <strong>structural calculations in Tekla Tedds</strong>,
+              <strong>structural and Building Regulations drawings in AutoCAD</strong>, and
+              <strong>full quantity surveying take-offs in Bluebeam Revu</strong>. Committed to delivering safer,
+              more resilient and sustainable infrastructure.
+            </p>
+            <div class="hero-badges">
+              <span class="badge badge-teal">Tekla Tedds</span>
+              <span class="badge badge-silver">AutoCAD 2D</span>
+              <span class="badge badge-steel">Bluebeam Revu</span>
+              <span class="badge badge-teal">Structural Design</span>
+              <span class="badge badge-silver">Quantity Surveying</span>
+            </div>
+            <div class="hero-cta">
+              <a href="#work" class="btn btn-primary">
+                View my work <svg class="icon"><use href="#i-arrow" /></svg>
+              </a>
+              <a href="Anik_Shekhar_Mazumder_CV.pdf" download class="btn btn-outline">
+                <svg class="icon"><use href="#i-download" /></svg> Download CV
+              </a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-visual-inner" id="heroVisual">
+              <div class="sheet-plate" aria-hidden="true"></div>
+              <div class="sheet">
+                <span class="portrait">
+                  <img class="profile-img" src="assets/Aniruddha.jpeg" alt="Portrait of Anik Shekhar Mazumder" width="1200" height="1600" />
+                </span>
+                <div class="title-block" aria-hidden="true">
+                  <div><small>Engineer</small><b>Anik S. Mazumder</b></div>
+                  <div><small>Discipline</small><b>Civil &amp; Structural</b></div>
+                </div>
+              </div>
+              <span class="sheet-mark tl" aria-hidden="true"></span>
+              <span class="sheet-mark br" aria-hidden="true"></span>
+            </div>
           </div>
         </div>
-
-        <!-- Profile Image with Animations -->
-        <div
-          class="hero-visual"
-          aria-label="Profile photo of Anik Shekhar Mazumder"
-        >
-          <div class="ring-outer"></div>
-          <div class="ring-mid"></div>
-          <div class="img-glow"></div>
-          <div class="float-shape shape-1"></div>
-          <div class="float-shape shape-2"></div>
-          <div class="float-shape shape-3"></div>
-          <div class="float-shape shape-4"></div>
-          <!-- Profile placeholder – replace src with actual photo path -->
-          <img class="profile-img" src="Aniruddha.jpeg" alt="Anik Sheikhar" />
-          <!-- Uncomment below and add your photo path:
-        <img class="profile-img" src="your-photo.jpg" alt="Anik Shekhar Mazumder" />
-        --></div>
-      </section>
-
-      <!-- Stats -->
-      <div style="padding: 0 5%; max-width: 1200px; margin: 0 auto">
-        <div class="stats-bar reveal">
-          <div class="stat-item">
-            <span class="stat-number">3.01</span>
-            <span class="stat-label">CGPA (B.Sc. Eng.)</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">5.0</span>
-            <span class="stat-label">GPA — HSC & SSC</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">60h</span>
-            <span class="stat-label">Web Dev Training</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">3+</span>
-            <span class="stat-label">Languages Known</span>
+        <div class="hero-meta">
+          <div class="wrap">
+            <ul>
+              <li><svg class="icon"><use href="#i-pin" /></svg>Sylhet, Bangladesh &middot; working remotely with England</li>
+              <li>
+                <svg class="icon"><use href="#i-mail" /></svg>
+                <a href="mailto:anirudhamajumder68@gmail.com">anirudhamajumder68@gmail.com</a>
+              </li>
+              <li>
+                <svg class="icon"><use href="#i-linkedin" /></svg>
+                <a href="https://linkedin.com/in/anikshekhar" target="_blank" rel="noopener">linkedin.com/in/anikshekhar</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- ─── ABOUT ──────────────────────────────────────────── -->
-      <section id="about">
-        <div class="section-label reveal">About Me</div>
-        <h2 class="section-title reveal reveal-delay-1">Who I Am</h2>
-        <div class="about-grid">
-          <div class="about-text reveal reveal-delay-2">
+      <!-- ─── Numbers ──────────────────────────────────────────── -->
+      <section class="numbers" aria-label="Work delivered">
+        <div class="wrap">
+          <div class="numbers-grid">
+            <div class="number">
+              <b>7</b>
+              <span>Structural calculation packages worked on</span>
+            </div>
+            <div class="number">
+              <b>5</b>
+              <span>Building Regulations drawing sets</span>
+            </div>
+            <div class="number">
+              <b>8</b>
+              <span>Structural inspection reports</span>
+            </div>
+            <div class="number">
+              <b>4</b>
+              <span>Quantity take-offs &amp; Bills of Quantities</span>
+            </div>
+          </div>
+          <p class="numbers-note">UK projects represented in this portfolio, September to November 2026.</p>
+        </div>
+      </section>
+
+      <!-- ─── Work ─────────────────────────────────────────────── -->
+      <section id="work">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="eyebrow"><svg class="icon"><use href="#i-helmet" /></svg>Selected work</div>
+            <h2>What I do, with the work to show for it</h2>
             <p>
-              I'm a
-              <strong
-                >final-semester Civil & Environmental Engineering
-                student</strong
-              >
-              at Shahjalal University of Science and Technology (SUST), Sylhet,
-              Bangladesh. My academic journey has been built on a solid
-              foundation of structural analysis, environmental impact
-              assessment, and GIS-based spatial computing.
-            </p>
-            <p>
-              My undergraduate thesis focuses on a
-              <strong>GIS-based Life Cycle Assessment</strong>
-              of plastic waste-to-energy conversion through pyrolysis — a
-              project that blends environmental science, spatial analysis, and
-              Python automation to develop a sustainable urban waste management
-              framework for Sylhet City.
-            </p>
-            <p>
-              Beyond my core engineering skills, I'm passionate about
-              technology. I've completed formal web development training and
-              bring a unique blend of
-              <strong
-                >civil engineering expertise and programming capability</strong
-              >
-              to every project I work on.
+              Four services I deliver day to day on live UK residential and tender projects. Each one below lists
+              what I produce, the standards I work to, and sample sheets from real jobs. Select any sheet to
+              enlarge it.
             </p>
           </div>
-          <div class="about-details reveal reveal-delay-3">
-            <div class="detail-row">
-              <span class="detail-icon">📍</span>
-              <div class="detail-info">
-                <div class="detail-label">Location</div>
-                <div class="detail-value">Sylhet, Bangladesh</div>
-              </div>
-            </div>
-            <div class="detail-row">
-              <span class="detail-icon">🎓</span>
-              <div class="detail-info">
-                <div class="detail-label">University</div>
-                <div class="detail-value">
-                  Shahjalal University of Science & Technology
+
+          <div class="notice reveal">
+            <svg class="icon"><use href="#i-lock" /></svg>
+            <p>
+              Samples are excerpts from projects delivered with A2Z Structural Engineering. Client names, property
+              addresses and title blocks have been removed, and projects are identified by type and town only. The
+              samples are watermarked and shown for review only; they must not be copied or reused.
+            </p>
+          </div>
+
+          <nav class="service-nav reveal" aria-label="Services">
+            <a class="tilt" href="#"><svg class="icon"><use href="#i-beam" /></svg>Structural Calculations</a>
+            <a class="tilt" href="#"><svg class="icon"><use href="#i-plan" /></svg>Building Regulations Drawings</a>
+            <a class="tilt" href="#"><svg class="icon"><use href="#i-report" /></svg>Structural Inspection Reports</a>
+            <a class="tilt" href="#"><svg class="icon"><use href="#i-measure" /></svg>Quantity Surveying</a>
+          </nav>
+
+          <!-- 01 Structural calculations -->
+          <article class="service" id="calcs">
+            <div class="service-top">
+              <div class="reveal">
+                <div class="service-num">01</div>
+                <h3>Structural Calculations</h3>
+                <p class="service-lead">
+                  Calculation packages for UK residential extensions, loft conversions and internal alterations,
+                  taken from load take-down through member design to connections and bearings, and issued for
+                  Building Control approval.
+                </p>
+                <div class="deliver-title">What I deliver</div>
+                <ul class="deliver">
+                  <li>Load tables and load take-downs for roofs, floors and walls</li>
+                  <li>Steel beam and column design to EN 1993-1-1 with the UK National Annex</li>
+                  <li>Timber joists, trimmers and flitch beams, and strip footing design</li>
+                  <li>Connections and bearings: bolted beam splices, padstones and spreader plates</li>
+                  <li>Structural layout drawings and fabrication details issued with the calculations</li>
+                  <li>Checking of calculation packages, with a written corrections schedule</li>
+                </ul>
+                <div class="chips">
+                  <span class="chip fill">Tekla Tedds</span>
+                  <span class="chip fill">AutoCAD 2D</span>
+                  <span class="chip">EN 1993-1-1 + UK NA</span>
+                  <span class="chip">Approved Document A</span>
                 </div>
               </div>
+              <div class="gallery reveal">
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 141947.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 141947.png" alt="Structural layout plan of a rear extension showing steel beams, posts and roof joists" loading="lazy" draggable="false" width="1280" height="756" /></span>
+                  <span class="shot-cap"><b>Structural layout</b>Rear extension: beams, posts, flat-roof joists and rooflight trimmers</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 165511.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 165511.png" alt="Tekla Tedds steel beam analysis output with load, bending moment and shear force diagrams" loading="lazy" draggable="false" width="1041" height="1231" /></span>
+                  <span class="shot-cap"><b>Steel beam design</b>Tedds analysis and design to EN 1993-1-1</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 165354.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 165354.png" alt="Gallows bracket sections, elevations and plans supporting a retained chimney breast" loading="lazy" draggable="false" width="1280" height="774" /></span>
+                  <span class="shot-cap"><b>Gallows brackets</b>Sections, elevations and plans for a retained chimney breast</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-15 113158.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-15 113158.png" alt="Bolted flange plate beam splice detail with design data" loading="lazy" draggable="false" width="1280" height="774" /></span>
+                  <span class="shot-cap"><b>Beam splice</b>Bolted flange-plate splice for a UC 203&times;203&times;46</span>
+                </button>
+              </div>
             </div>
-            <div class="detail-row">
-              <span class="detail-icon">📧</span>
-              <div class="detail-info">
-                <div class="detail-label">Email</div>
-                <div class="detail-value">
-                  <a href="mailto:anirudhamajumder68@gmail.com"
-                    >anirudhamajumder68@gmail.com</a
-                  >
+            <div class="projects reveal">
+              <h4>Projects</h4>
+              <ul class="project-list">
+                <li>
+                  <span class="p-name">Single-storey rear extension</span>
+                  <span class="p-place">Chadwell Heath, London</span>
+                  <span class="p-scope">48-page package: UC beams spanning up to 6.8 m, steel posts, C24 flat-roof joists, rooflight trimmers and strip foundation</span>
+                </li>
+                <li>
+                  <span class="p-name">Chimney breast removal on gallows brackets</span>
+                  <span class="p-place">Upminster, Essex</span>
+                  <span class="p-scope">Chimney load take-down, S355 steel angle design for two bracket sizes, and fabrication drawings with 3D views</span>
+                </li>
+                <li>
+                  <span class="p-name">Load-bearing wall removal</span>
+                  <span class="p-place">Romford, London</span>
+                  <span class="p-scope">UB 203&times;102&times;23 over a 3.7 m opening, bearing on mild-steel spreader plates</span>
+                </li>
+                <li>
+                  <span class="p-name">Two-storey house remodel</span>
+                  <span class="p-place">Houghton Regis, Bedfordshire</span>
+                  <span class="p-scope">Tedds designs for steel beams, column, lintel, timber flitch beam and a bolted beam splice, with beam and column position plans</span>
+                </li>
+                <li>
+                  <span class="p-name">Rear extension</span>
+                  <span class="p-place">Rainham, London</span>
+                  <span class="p-scope">Steel beam and strip footing design, with foundation and floor plans</span>
+                </li>
+                <li>
+                  <span class="p-name">Internal alterations</span>
+                  <span class="p-place">Mill Hill, London</span>
+                  <span class="p-scope">Steel beam and column design to EN 1993-1-1, and proposed plans showing the new steelwork</span>
+                </li>
+                <li>
+                  <span class="p-name">Calculation package review</span>
+                  <span class="p-place">Erith, Kent</span>
+                  <span class="p-scope">Checked a 63-page package and issued a corrections schedule covering beam reactions, load classification and load positions</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 02 Building Regulations drawings -->
+          <article class="service" id="drawings">
+            <div class="service-top">
+              <div class="reveal">
+                <div class="service-num">02</div>
+                <h3>Building Regulations Drawings</h3>
+                <p class="service-lead">
+                  Full Plans drawing sets for Building Control: existing and proposed layouts developed into
+                  construction sections, details and specification notes that reference the Approved Documents.
+                </p>
+                <div class="deliver-title">What I deliver</div>
+                <ul class="deliver">
+                  <li>Existing and proposed plans, elevations and sections</li>
+                  <li>Foundation plans with trench-fill and strip foundation details, including drains near foundations</li>
+                  <li>Wall, floor and roof build-ups: cavity walls, suspended timber floors, cold pitched and warm flat roofs</li>
+                  <li>Structural key plans coordinated with the calculations: beam bearings, padstones and fire protection to steelwork</li>
+                  <li>Fire safety and ventilation plans, and drainage details</li>
+                  <li>Specification notes, drawing registers and revision control</li>
+                </ul>
+                <div class="chips">
+                  <span class="chip fill">AutoCAD 2D</span>
+                  <span class="chip">Approved Documents A, B, H, L</span>
+                  <span class="chip">Full Plans applications</span>
                 </div>
               </div>
-            </div>
-            <div class="detail-row">
-              <span class="detail-icon">📱</span>
-              <div class="detail-info">
-                <div class="detail-label">Phone</div>
-                <div class="detail-value">+880 1306 596925</div>
+              <div class="gallery reveal">
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 143032.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 143032.png" alt="Proposed ground floor plan with new walls, dimensions and specification notes" loading="lazy" draggable="false" width="1280" height="1124" /></span>
+                  <span class="shot-cap"><b>Proposed ground floor plan</b>New and retained walls, dimensions and notes</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 142709.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 142709.png" alt="Foundation plan with a section through new wall, foundation and floor edge" loading="lazy" draggable="false" width="1280" height="1124" /></span>
+                  <span class="shot-cap"><b>Foundation plan and section</b>New wall, trench-fill foundation and floor edge</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 143513.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 143513.png" alt="Building section through a two-storey extension with first floor construction detail" loading="lazy" draggable="false" width="1280" height="1125" /></span>
+                  <span class="shot-cap"><b>Section A-A</b>Two-storey extension with first floor construction</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 143418.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 143418.png" alt="Window head, cill, jamb and bi-fold door threshold details" loading="lazy" draggable="false" width="1280" height="1125" /></span>
+                  <span class="shot-cap"><b>Opening details</b>Window head, cill, jamb and bi-fold door threshold</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 143228.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 143228.png" alt="Details for beam bearing on padstone, fire protection to steelwork and column base on pad foundation" loading="lazy" draggable="false" width="1280" height="1124" /></span>
+                  <span class="shot-cap"><b>Steelwork details</b>Padstone bearing, fire protection, column base and flitch beam</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 142122.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 142122.png" alt="Three-dimensional cut-away of strip foundation and solid ground floor build-up" loading="lazy" draggable="false" width="1280" height="761" /></span>
+                  <span class="shot-cap"><b>3D cut-away</b>Strip foundation and solid ground floor build-up</span>
+                </button>
               </div>
             </div>
-            <div class="detail-row">
-              <span class="detail-icon">🔗</span>
-              <div class="detail-info">
-                <div class="detail-label">LinkedIn</div>
-                <div class="detail-value">
-                  <a
-                    href="https://linkedin.com/in/anikshekhar"
-                    target="_blank"
-                    rel="noopener"
-                    >linkedin.com/in/anikshekhar</a
-                  >
+            <div class="projects reveal">
+              <h4>Projects</h4>
+              <ul class="project-list">
+                <li>
+                  <span class="p-name">Two-storey side extension, garage demolition and chimney removal</span>
+                  <span class="p-place">South Ockendon, Essex</span>
+                  <span class="p-scope">16-sheet Full Plans set: plans, foundations, pitched roof, sections, elevations, opening details, fire safety plan and drainage</span>
+                </li>
+                <li>
+                  <span class="p-name">House remodel with rear extension</span>
+                  <span class="p-place">Houghton Regis, Bedfordshire</span>
+                  <span class="p-scope">17 sheets at Rev B: structural alterations, suspended timber floor, warm flat roof with roof lanterns, fire and ventilation plans</span>
+                </li>
+                <li>
+                  <span class="p-name">Single-storey rear extension</span>
+                  <span class="p-place">Chadwell Heath, London</span>
+                  <span class="p-scope">14 sheets including 3D cut-away foundation details, strapping details and specification notes</span>
+                </li>
+                <li>
+                  <span class="p-name">Ground-floor alterations</span>
+                  <span class="p-place">Sevenoaks, Kent</span>
+                  <span class="p-scope">10-sheet draft set with existing, demolition and proposed layouts</span>
+                </li>
+                <li>
+                  <span class="p-name">Drawing set review</span>
+                  <span class="p-place">Southall, London</span>
+                  <span class="p-scope">8-sheet set checked against the Building Regulations, with a change schedule giving the reason and reference for every revision</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 03 Structural inspection reports -->
+          <article class="service" id="reports">
+            <div class="service-top">
+              <div class="reveal">
+                <div class="service-num">03</div>
+                <h3>Structural Inspection Reports</h3>
+                <p class="service-lead">
+                  Visual structural inspection reports for homeowners and prospective purchasers, compiled from the
+                  inspecting engineer's survey photographs, video and site notes and issued under the engineer's
+                  sign-off.
+                </p>
+                <div class="deliver-title">What I deliver</div>
+                <ul class="deliver">
+                  <li>A clear structure: property description, observations by element, discussion, recommendations and conclusion</li>
+                  <li>Cracking described and classified against BRE Digest 251 categories</li>
+                  <li>Roof structure, removed walls, chimney breasts and openings assessed against good practice</li>
+                  <li>Direct responses to the matters raised in RICS Home Survey reports</li>
+                  <li>Figure-referenced photographs in the text, with a full photographic appendix</li>
+                  <li>Practical remedial recommendations for each finding</li>
+                </ul>
+                <div class="chips">
+                  <span class="chip fill">MS Word</span>
+                  <span class="chip">BRE Digest 251</span>
+                  <span class="chip">RICS Level 3 follow-up</span>
                 </div>
               </div>
-            </div>
-            <div class="detail-row">
-              <span class="detail-icon">💼</span>
-              <div class="detail-info">
-                <div class="detail-label">Status</div>
-                <div class="detail-value">
-                  Open to Entry-Level Opportunities
-                </div>
+              <div class="gallery reveal">
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 164348.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 164348.png" alt="Inspection report page describing purlin bearings in a roof space with a photograph" loading="lazy" draggable="false" width="961" height="1051" /></span>
+                  <span class="shot-cap"><b>Inspection observations</b>Roof space: purlin bearings, with a referenced photograph</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 164305.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 164305.png" alt="Inspection report page discussing roof structure and removed walls" loading="lazy" draggable="false" width="961" height="1249" /></span>
+                  <span class="shot-cap"><b>Discussion of findings</b>Roof structure, purlin supports and removed walls</span>
+                </button>
               </div>
             </div>
+            <div class="projects reveal">
+              <h4>Projects</h4>
+              <ul class="project-list">
+                <li>
+                  <span class="p-name">Pre-purchase inspection following a RICS Level 3 survey</span>
+                  <span class="p-place">Hornchurch, London</span>
+                  <span class="p-scope">Around 70 pages with photographic and video-still appendices</span>
+                </li>
+                <li>
+                  <span class="p-name">Structural visual inspection</span>
+                  <span class="p-place">Brentwood, Essex</span>
+                  <span class="p-scope">52-page report with photographic record</span>
+                </li>
+                <li>
+                  <span class="p-name">Structural visual inspection</span>
+                  <span class="p-place">Purley, London</span>
+                  <span class="p-scope">40-page report with photographic record</span>
+                </li>
+                <li>
+                  <span class="p-name">Five further visual inspections</span>
+                  <span class="p-place">Hornchurch, Romford, Chadwell St Mary</span>
+                  <span class="p-scope">Reports of 10 to 34 pages for houses in East London and Essex</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 04 Quantity surveying -->
+          <article class="service" id="qs">
+            <div class="service-top">
+              <div class="reveal">
+                <div class="service-num">04</div>
+                <h3>Quantity Surveying</h3>
+                <p class="service-lead">
+                  Digital take-offs from tender drawings in Bluebeam Revu, built into measured Bills of Quantities
+                  in Excel so that every quantity traces back to a markup on the drawing.
+                </p>
+                <div class="deliver-title">What I deliver</div>
+                <ul class="deliver">
+                  <li>Area, length, count and volume measurement at calibrated scales, with check measures</li>
+                  <li>Markup lists grouped by subject and exported to Excel</li>
+                  <li>Measured BoQs with rate and amount columns ready for pricing</li>
+                  <li>Depth and build-up assumptions stated, so volumes can be adjusted</li>
+                  <li>Query schedules flagging conflicts between drawings and specifications</li>
+                  <li>Groundworks, concrete, drainage, hard and soft landscaping</li>
+                </ul>
+                <div class="chips">
+                  <span class="chip fill">Bluebeam Revu</span>
+                  <span class="chip fill">MS Excel</span>
+                  <span class="chip">Bills of Quantities</span>
+                  <span class="chip">Cost estimates</span>
+                </div>
+
+                <div class="table-card">
+                  <div class="table-scroll">
+                    <table>
+                      <caption>
+                        Take-off summary excerpt &middot; residential external works
+                      </caption>
+                      <thead>
+                        <tr>
+                          <th>Item</th>
+                          <th>Description</th>
+                          <th class="num">Qty</th>
+                          <th>Unit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>03.04</td><td class="desc">Permeable block paving</td><td class="num">113.2</td><td>m&sup2;</td></tr>
+                        <tr><td>03.06</td><td class="desc">Permeable concrete flag paving</td><td class="num">49.2</td><td>m&sup2;</td></tr>
+                        <tr><td>03.03</td><td class="desc">Edging, paving to soft landscape</td><td class="num">184.0</td><td>m</td></tr>
+                        <tr><td>02.06</td><td class="desc">Topsoil 450 mm, ameliorated</td><td class="num">87.7</td><td>m&sup3;</td></tr>
+                        <tr><td>07</td><td class="desc">Trees, container grown</td><td class="num">24</td><td>nr</td></tr>
+                        <tr><td>10</td><td class="desc">External light fittings</td><td class="num">15</td><td>nr</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="gallery reveal">
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 164928.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 164928.png" alt="Bluebeam take-off of paving areas and boundary lengths on a residential courtyard plan" loading="lazy" draggable="false" width="1281" height="882" /></span>
+                  <span class="shot-cap"><b>Hardscape take-off</b>Paving areas and boundary lengths by type</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 164604.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 164604.png" alt="Bluebeam take-off of reinforced concrete ground beam lengths and cross-section areas" loading="lazy" draggable="false" width="1280" height="1120" /></span>
+                  <span class="shot-cap"><b>Ground beam take-off</b>Beam lengths and cross-section areas for concrete volumes</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 165112.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 165112.png" alt="Bluebeam take-off of floor construction types on a basement plan" loading="lazy" draggable="false" width="1280" height="854" /></span>
+                  <span class="shot-cap"><b>Floor take-off</b>Floor construction types measured by area</span>
+                </button>
+                <button class="shot tilt" type="button" data-full="assets/work/Screenshot 2026-11-14 164727.png">
+                  <span class="shot-img"><img src="assets/work/Screenshot 2026-11-14 164727.png" alt="Bluebeam take-off of seeding, planting and fencing on a sports ground landscape plan with legend of quantities" loading="lazy" draggable="false" width="1281" height="1182" /></span>
+                  <span class="shot-cap"><b>Soft landscape take-off</b>Seeding, planting and fencing, with the Revu legend of quantities</span>
+                </button>
+              </div>
+            </div>
+            <div class="projects reveal">
+              <h4>Projects</h4>
+              <ul class="project-list">
+                <li>
+                  <span class="p-name">Residential courtyard external works</span>
+                  <span class="p-place">South-East London</span>
+                  <span class="p-scope">Five drawings measured: paving, boundaries, planting, soil build-ups, lighting and water points across a 1,080 m&sup2; site</span>
+                </li>
+                <li>
+                  <span class="p-name">Listed church re-ordering, groundworks</span>
+                  <span class="p-place">West London</span>
+                  <span class="p-scope">Beam-and-block and insulated floors, hard landscaping dig and sub-base, and drainage, issued with 15 tender queries and an assumptions sheet</span>
+                </li>
+                <li>
+                  <span class="p-name">College building, ground beams</span>
+                  <span class="p-place">West Sussex</span>
+                  <span class="p-scope">252 m of reinforced concrete ground beam in three section types: excavation, disposal, blinding and C30 concrete volumes</span>
+                </li>
+                <li>
+                  <span class="p-name">Sports ground soft landscaping</span>
+                  <span class="p-place">Kent</span>
+                  <span class="p-scope">Tree and native woodland planting, grass seeding, wildflower meadow, mulch and protective fencing</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ─── Experience ───────────────────────────────────────── -->
+      <section id="experience" class="band">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="eyebrow"><svg class="icon"><use href="#i-briefcase" /></svg>Experience</div>
+            <h2>Where I work</h2>
+          </div>
+          <div class="xp tilt reveal">
+            <div class="xp-head">
+              <h3>Associate Civil Engineer</h3>
+              <span class="xp-date"><svg class="icon"><use href="#i-calendar" /></svg>09/2026 &ndash; Present</span>
+            </div>
+            <div class="xp-org">Cube In Cloud</div>
+            <p class="xp-sub">UK structural engineering projects for A2Z Structural Engineering (England)</p>
+            <ul class="deliver">
+              <li>Prepare structural calculations in Tekla Tedds for residential extensions, loft conversions and internal alterations, including the design and sizing of beams, columns and their connections.</li>
+              <li>Carry out structural assessment and design for alterations and structural modifications to existing UK buildings.</li>
+              <li>Produce 2D structural layouts and details in AutoCAD, and prepare Building Regulations drawings for UK residential projects.</li>
+              <li>Compile structural inspection reports and engineering documentation.</li>
+              <li>Provide full quantity surveying services, including digital take-offs in Bluebeam Revu, Bills of Quantities and cost estimates.</li>
+              <li>Work to UK project requirements and deadlines, coordinating remotely with the England-based A2Z team.</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <div class="divider"></div>
-
-      <!-- ─── SKILLS ──────────────────────────────────────────── -->
+      <!-- ─── Skills ───────────────────────────────────────────── -->
       <section id="skills">
-        <div class="section-label reveal">Expertise</div>
-        <h2 class="section-title reveal reveal-delay-1">Skills & Tools</h2>
-        <p class="section-desc reveal reveal-delay-2">
-          A versatile skill set spanning civil engineering software,
-          environmental modelling, GIS platforms, and modern programming
-          languages.
-        </p>
-        <div class="skills-grid">
-          <div class="skill-card reveal reveal-delay-1">
-            <span class="skill-card-icon">🏗️</span>
-            <div class="skill-card-title">Civil Engineering</div>
-            <div class="skill-tags">
-              <span class="skill-tag">AutoCAD</span>
-              <span class="skill-tag">ETABS</span>
-              <span class="skill-tag">Structural Design</span>
-              <span class="skill-tag">Construction Management</span>
-            </div>
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="eyebrow"><svg class="icon"><use href="#i-tools" /></svg>Skills</div>
+            <h2>Skills &amp; software</h2>
           </div>
-          <div class="skill-card reveal reveal-delay-2">
-            <span class="skill-card-icon">🌍</span>
-            <div class="skill-card-title">GIS & Environment</div>
-            <div class="skill-tags">
-              <span class="skill-tag">ArcGIS Pro</span>
-              <span class="skill-tag">MODFLOW</span>
-              <span class="skill-tag">OpenLCA</span>
-              <span class="skill-tag">EIA</span>
-              <span class="skill-tag">LCA</span>
+          <div class="skills-grid">
+            <div class="card tilt reveal">
+              <h3><svg class="icon"><use href="#i-beam" /></svg>Structural Design</h3>
+              <ul class="plain-list">
+                <li>Structural Calculations</li>
+                <li>Beam &amp; Column Sizing</li>
+                <li>Structural Assessment</li>
+                <li>Extensions, Lofts &amp; Alterations</li>
+              </ul>
             </div>
-          </div>
-          <div class="skill-card reveal reveal-delay-3">
-            <span class="skill-card-icon">♻️</span>
-            <div class="skill-card-title">Sustainability</div>
-            <div class="skill-tags">
-              <span class="skill-tag">Waste Management</span>
-              <span class="skill-tag">Pyrolysis</span>
-              <span class="skill-tag">Waste-to-Energy</span>
-              <span class="skill-tag">Carbon Footprint</span>
+            <div class="card tilt reveal">
+              <h3><svg class="icon"><use href="#i-plan" /></svg>Drawings &amp; Reporting</h3>
+              <ul class="plain-list">
+                <li>AutoCAD 2D Drafting</li>
+                <li>Building Regulations Drawings</li>
+                <li>Structural Detailing</li>
+                <li>Structural Inspection Reports</li>
+              </ul>
             </div>
-          </div>
-          <div class="skill-card reveal reveal-delay-1">
-            <span class="skill-card-icon">💻</span>
-            <div class="skill-card-title">Programming</div>
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">C Language</span>
-              <span class="skill-tag">Web Scraping</span>
-              <span class="skill-tag">Data Processing</span>
+            <div class="card tilt reveal">
+              <h3><svg class="icon"><use href="#i-measure" /></svg>Project Delivery</h3>
+              <ul class="plain-list">
+                <li>UK Residential Projects</li>
+                <li>Quantity Take-offs &amp; BoQs</li>
+                <li>Cost Estimates</li>
+                <li>Remote, Cross-border Working</li>
+              </ul>
             </div>
-          </div>
-          <div class="skill-card reveal reveal-delay-2">
-            <span class="skill-card-icon">🌐</span>
-            <div class="skill-card-title">Web Development</div>
-            <div class="skill-tags">
-              <span class="skill-tag">HTML</span>
-              <span class="skill-tag">CSS</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">Responsive Design</span>
+            <div class="card skills-wide tilt reveal">
+              <h3><svg class="icon"><use href="#i-tools" /></svg>Engineering Software</h3>
+              <div class="chips">
+                <span class="chip fill">Tekla Tedds</span>
+                <span class="chip fill">AutoCAD (2D)</span>
+                <span class="chip fill">Bluebeam Revu</span>
+                <span class="chip">ETABS</span>
+                <span class="chip">ArcGIS Pro</span>
+                <span class="chip">OpenLCA</span>
+                <span class="chip">MODFLOW</span>
+                <span class="chip">MS Office Suite</span>
+              </div>
             </div>
-          </div>
-          <div class="skill-card reveal reveal-delay-3">
-            <span class="skill-card-icon">📊</span>
-            <div class="skill-card-title">Productivity & Soft Skills</div>
-            <div class="skill-tags">
-              <span class="skill-tag">MS Word</span>
-              <span class="skill-tag">Excel</span>
-              <span class="skill-tag">PowerPoint</span>
-              <span class="skill-tag">Problem Solving</span>
-              <span class="skill-tag">Project Management</span>
+            <div class="card skills-wide tilt reveal">
+              <h3><svg class="icon"><use href="#i-code" /></svg>CSE &amp; Digital Skills</h3>
+              <div class="skills-sub">
+                <div>
+                  <h4>Web Scraping &amp; Data</h4>
+                  <div class="chips">
+                    <span class="chip">Python</span>
+                    <span class="chip">Selenium</span>
+                    <span class="chip">NumPy</span>
+                    <span class="chip">Pandas</span>
+                    <span class="chip">MongoDB</span>
+                  </div>
+                </div>
+                <div>
+                  <h4>Frontend Development</h4>
+                  <div class="chips">
+                    <span class="chip">HTML</span>
+                    <span class="chip">CSS</span>
+                    <span class="chip">JavaScript</span>
+                  </div>
+                </div>
+                <div>
+                  <h4>AI &amp; Programming</h4>
+                  <div class="chips">
+                    <span class="chip">Prompt Engineering</span>
+                    <span class="chip">C Programming</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- ─── EDUCATION ────────────────────────────────────────── -->
-      <section id="education">
-        <div class="section-label reveal">Academic Background</div>
-        <h2 class="section-title reveal reveal-delay-1">Education</h2>
-        <div class="edu-timeline">
-          <div class="edu-item reveal reveal-delay-1">
-            <div class="edu-degree">
-              B.Sc. Engineering — Civil and Environmental Engineering
-            </div>
-            <div class="edu-institution">
-              Shahjalal University of Science and Technology (SUST)
-            </div>
-            <div class="edu-meta">
-              <span>📍 Sylhet, Bangladesh</span>
-              <span>🗓 Currently in Final Semester</span>
-            </div>
-            <span class="edu-gpa">⭐ CGPA: 3.01 / 4.00</span>
-          </div>
-          <div class="edu-item reveal reveal-delay-2">
-            <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
-            <div class="edu-institution">
-              Cumilla Victoria Government College
-            </div>
-            <div class="edu-meta">
-              <span>📍 Cumilla, Bangladesh</span>
-            </div>
-            <span class="edu-gpa">🏆 GPA: 5.00 / 5.00</span>
-          </div>
-          <div class="edu-item reveal reveal-delay-3">
-            <div class="edu-degree">Secondary School Certificate (SSC)</div>
-            <div class="edu-institution">
-              Ispahani Public School and College
-            </div>
-            <div class="edu-meta">
-              <span>📍 Cumilla, Bangladesh</span>
-            </div>
-            <span class="edu-gpa">🏆 GPA: 5.00 / 5.00</span>
           </div>
         </div>
       </section>
 
-      <div class="divider"></div>
-
-      <!-- ─── RESEARCH ─────────────────────────────────────────── -->
-      <section id="research">
-        <div class="section-label reveal">Undergraduate Thesis</div>
-        <h2 class="section-title reveal reveal-delay-1">Research & Projects</h2>
-        <div class="research-card reveal reveal-delay-2">
-          <span class="research-badge">🔬 Ongoing — Nov 2025 to Present</span>
-          <div class="research-title">
-            GIS-Based Life Cycle Assessment of Plastic Waste-to-Energy
-            Conversion through Pyrolysis: A Sustainable Framework for Urban
-            Waste Management in Sylhet
+      <!-- ─── Education ─────────────────────────────────────────── -->
+      <section id="education" class="band">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="eyebrow"><svg class="icon"><use href="#i-cap" /></svg>Education</div>
+            <h2>Academic background</h2>
           </div>
-          <div class="research-sub">
-            Student Researcher · Shahjalal University of Science and Technology
-          </div>
-          <ul class="research-bullets">
+          <ul class="edu reveal">
             <li>
-              Utilized ArcGIS Pro to analyze ward-wise plastic waste generation
-              in Sylhet City based on population density and waste generation
-              data.
+              <span class="edu-years">2022 &ndash; 2026</span>
+              <div>
+                <h3>B.Sc. (Engg.) Civil &amp; Environmental Engineering</h3>
+                <div class="edu-school">Shahjalal University of Science and Technology (SUST)</div>
+                <div class="edu-place">Sylhet, Bangladesh</div>
+              </div>
+              <div class="gpa"><small>GPA</small><b>3.03 / 4.00</b></div>
             </li>
             <li>
-              Conducted site selection and suitability analysis for
-              waste-to-energy conversion plants using spatial multi-criteria
-              methods.
+              <span class="edu-years">2018 &ndash; 2020</span>
+              <div>
+                <h3>Higher Secondary Certificate (HSC) &ndash; Science</h3>
+                <div class="edu-school">Cumilla Victoria Government College</div>
+                <div class="edu-place">Cumilla, Bangladesh</div>
+              </div>
+              <div class="gpa"><small>GPA</small><b>5.00 / 5.00</b></div>
             </li>
             <li>
-              Integrated Python scripts within ArcGIS Pro to streamline and
-              automate data processing and spatial analysis workflows.
-            </li>
-            <li>
-              Performing a full Life Cycle Assessment (LCA) via OpenLCA to
-              compare three different pyrolysis routes for environmental impact.
-            </li>
-            <li>
-              Identifying the most environmentally sustainable pyrolysis method
-              by evaluating emissions, energy, and material flow.
-            </li>
-            <li>
-              Developing a comprehensive, scalable framework for urban waste
-              management that reduces environmental footprint across the city.
+              <span class="edu-years">2016 &ndash; 2018</span>
+              <div>
+                <h3>Secondary School Certificate (SSC) &ndash; Science</h3>
+                <div class="edu-school">Ispahani Public School and College</div>
+                <div class="edu-place">Cumilla, Bangladesh</div>
+              </div>
+              <div class="gpa"><small>GPA</small><b>5.00 / 5.00</b></div>
             </li>
           </ul>
         </div>
       </section>
 
-      <div class="divider"></div>
+      <!-- ─── Research ─────────────────────────────────────────── -->
+      <section id="research">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="eyebrow"><svg class="icon"><use href="#i-flask" /></svg>Research &amp; projects</div>
+            <h2>Undergraduate thesis</h2>
+          </div>
+          <div class="research tilt reveal">
+            <div>
+              <span class="xp-date"><svg class="icon"><use href="#i-calendar" /></svg>11/2025 &ndash; 2026 &middot; SUST</span>
+              <h3>GIS-Based Life Cycle Assessment of Plastic Waste-to-Energy Conversion through Pyrolysis, Sylhet City</h3>
+              <ul class="deliver" style="margin-bottom: 0">
+                <li>Mapped ward-wise plastic waste generation in ArcGIS Pro, automating data processing with Python, and applied multi-criteria overlay analysis to identify suitable sites for pyrolysis plants.</li>
+                <li>Compared three pyrolysis routes through life cycle assessment in OpenLCA to inform a sustainable waste-management framework for the city.</li>
+              </ul>
+            </div>
+            <div class="research-side">
+              <div>
+                <h4>Methods</h4>
+                <div class="chips">
+                  <span class="chip">GIS spatial analysis</span>
+                  <span class="chip">Multi-criteria overlay</span>
+                  <span class="chip">Life cycle assessment</span>
+                </div>
+              </div>
+              <div>
+                <h4>Tools</h4>
+                <div class="chips">
+                  <span class="chip fill">ArcGIS Pro</span>
+                  <span class="chip fill">OpenLCA</span>
+                  <span class="chip fill">Python</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <!-- ─── CV / RESUME ──────────────────────────────────────── -->
-      <section
-        id="cv"
-        style="
-          background: var(--surface);
-          border-top: 1px solid var(--border);
-          border-bottom: 1px solid var(--border);
-          padding: 80px 5%;
-        "
-      >
-        <div style="max-width: 1200px; margin: 0 auto">
-          <div class="cv-inner">
-            <div class="cv-text">
-              <div class="section-label reveal">Resume</div>
-              <h2 class="section-title reveal reveal-delay-1">
-                Curriculum Vitae
-              </h2>
-              <p class="reveal reveal-delay-2">
-                Download my full CV to explore my academic background, technical
-                skills, research experience, and certifications. It's available
-                as a clean PDF formatted for professional use.
+          <div class="extras">
+            <div class="card tilt reveal">
+              <h3><svg class="icon"><use href="#i-award" /></svg>Training</h3>
+              <b style="color: var(--ink); font-family: var(--font-head)">Basic Web Development</b>
+              <p class="cert-meta">
+                Institute of Information and Communication Technology (IICT), SUST, under the EDGE Project of
+                Bangladesh Computer Council
               </p>
-              <div
-                class="cv-meta reveal reveal-delay-3"
-                style="margin-top: 1.5rem"
-              >
-                <div class="cv-meta-item">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <rect x="4" y="2" width="16" height="20" rx="2" />
-                    <path d="M8 10h8M8 14h5" />
-                  </svg>
-                  PDF Format
-                </div>
-                <div class="cv-meta-item">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path d="M12 20V4M5 13l7 7 7-7" />
-                  </svg>
-                  Instant Download
-                </div>
-                <div class="cv-meta-item">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                  </svg>
-                  Updated April 2025
-                </div>
-              </div>
+              <p class="cert-meta">Dec 2024 &ndash; Feb 2025 &middot; 60 hours &middot; Serial EDGE-DSTS-126-8703-00006</p>
             </div>
-            <div class="cv-actions reveal reveal-delay-2">
-              <a
-                href="Anik_Shekhar_Mazumder.pdf"
-                download="Anik_Shekhar_Mazumder_CV.pdf"
-                class="btn-download"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                >
-                  <path
-                    d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
-                  />
-                </svg>
-                Download CV (PDF)
-              </a>
-              <a
-                href="https://linkedin.com/in/anikshekhar"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-ghost"
-                style="justify-content: center"
-              >
-                View LinkedIn Profile →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ─── CERTIFICATIONS ───────────────────────────────────── -->
-      <section id="certifications">
-        <div class="section-label reveal">Credentials</div>
-        <h2 class="section-title reveal reveal-delay-1">Certifications</h2>
-        <p class="section-desc reveal reveal-delay-2">
-          Professional certifications earned through formal training programs.
-          Click any certificate to view it in full.
-        </p>
-        <div class="certs-grid">
-          <!-- Certificate Card 1: EDGE Web Dev -->
-          <div
-            class="cert-card reveal reveal-delay-2"
-            onclick="openModal('cert-edge')"
-          >
-            <div class="cert-thumbnail">
-              <div class="cert-thumbnail-inner">
-                <div class="cert-preview-content">
-                  <div
-                    style="
-                      display: flex;
-                      gap: 4px;
-                      margin-bottom: 4px;
-                      justify-content: space-between;
-                      width: 100%;
-                    "
-                  >
-                    <div class="cert-logo-placeholder seal-blue">
-                      ICT<br />DIVISION
-                    </div>
-                    <div
-                      class="cert-logo-placeholder"
-                      style="background: #1a4a7a"
-                    >
-                      BCC
-                    </div>
-                    <div class="cert-logo-placeholder red">EDGE</div>
-                  </div>
-                  <div class="cert-preview-title">This is to certify that</div>
-                  <div class="cert-preview-name">Anik Shekhar Mazumder</div>
-                  <div class="cert-preview-body">
-                    has successfully completed a training on "Basic Web
-                    Developments" conducted by IICT, SUST from Dec 2024 to Feb
-                    2025 (60 hours), under EDGE Project of Bangladesh Computer
-                    Council.
-                  </div>
-                  <div class="cert-preview-seal">
-                    <div class="cert-preview-seal-dot seal-blue">ICT</div>
-                    <div
-                      class="cert-preview-seal-dot seal-green"
-                      style="
-                        font-size: 0.4rem;
-                        font-weight: 700;
-                        color: white;
-                        background: #1a8a3f;
-                        border-radius: 50%;
-                        width: 20px;
-                        height: 20px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                      "
-                    >
-                      DS4S
-                    </div>
-                    <div
-                      class="cert-preview-seal-dot seal-red"
-                      style="background: #c0392b"
-                    >
-                      BCC
-                    </div>
-                  </div>
-                </div>
+            <div class="card tilt reveal">
+              <h3><svg class="icon"><use href="#i-chat" /></svg>Languages</h3>
+              <div class="lang-row">
+                <div><b>Bangla</b><em>Native</em></div>
+                <span class="dots" role="img" aria-label="5 out of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
               </div>
-              <div class="cert-overlay">
-                <div class="cert-overlay-text">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                  View Full Certificate
-                </div>
+              <div class="lang-row">
+                <div><b>English</b><em>Fluent</em></div>
+                <span class="dots" role="img" aria-label="4 out of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
               </div>
-            </div>
-            <div class="cert-info">
-              <div class="cert-issuer">
-                <svg
-                  width="10"
-                  height="10"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                  />
-                </svg>
-                IICT · SUST &amp; Bangladesh Computer Council (EDGE)
-              </div>
-              <div class="cert-name">Basic Web Developments</div>
-              <div class="cert-meta">
-                <div class="cert-meta-item">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                    <path d="M16 2v4M8 2v4M3 10h18" />
-                  </svg>
-                  Dec 2024 – Feb 2025
-                </div>
-                <div class="cert-meta-item">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                  </svg>
-                  60 Hours
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Placeholder card for future certs -->
-          <div
-            class="cert-card reveal reveal-delay-3"
-            style="opacity: 0.5; pointer-events: none; border-style: dashed"
-          >
-            <div class="cert-thumbnail" style="background: var(--surface2)">
-              <div style="text-align: center; color: var(--text-dim)">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem">➕</div>
-                <div style="font-size: 0.8rem; font-weight: 600">
-                  More Coming Soon
-                </div>
-              </div>
-            </div>
-            <div class="cert-info">
-              <div class="cert-issuer" style="color: var(--text-dim)">
-                Future Certification
-              </div>
-              <div class="cert-name" style="color: var(--text-sub)">
-                To be added...
+              <div class="lang-row">
+                <div><b>German</b><em>Basic</em></div>
+                <span class="dots" role="img" aria-label="2 out of 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <div class="divider"></div>
-
-      <!-- ─── LANGUAGES ────────────────────────────────────────── -->
-      <section id="languages">
-        <div class="section-label reveal">Communication</div>
-        <h2 class="section-title reveal reveal-delay-1">Languages</h2>
-        <div class="lang-grid">
-          <div class="lang-card reveal reveal-delay-1">
-            <div class="lang-flag">🇧🇩</div>
-            <div class="lang-info">
-              <div class="lang-name">Bangla</div>
-              <div class="lang-level">Native Speaker</div>
-              <div class="lang-bar">
-                <div class="lang-bar-fill" style="width: 100%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="lang-card reveal reveal-delay-2">
-            <div class="lang-flag">🇬🇧</div>
-            <div class="lang-info">
-              <div class="lang-name">English</div>
-              <div class="lang-level">Fluent</div>
-              <div class="lang-bar">
-                <div class="lang-bar-fill" style="width: 88%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="lang-card reveal reveal-delay-3">
-            <div class="lang-flag">🇩🇪</div>
-            <div class="lang-info">
-              <div class="lang-name">German</div>
-              <div class="lang-level">Basic</div>
-              <div class="lang-bar">
-                <div
-                  class="lang-bar-fill"
-                  style="
-                    width: 25%;
-                    background: linear-gradient(
-                      90deg,
-                      var(--accent3),
-                      var(--accent2)
-                    );
-                  "
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- ─── CONTACT ──────────────────────────────────────────── -->
+      <!-- ─── Contact ──────────────────────────────────────────── -->
       <section id="contact">
-        <div class="section-label reveal">Reach Out</div>
-        <h2 class="section-title reveal reveal-delay-1">Contact Me</h2>
-        <p class="section-desc reveal reveal-delay-2">
-          Interested in collaborating or have an opportunity? I'd love to hear
-          from you.
-        </p>
-        <div class="contact-grid">
-          <a
-            href="mailto:anirudhamajumder68@gmail.com"
-            class="contact-card reveal reveal-delay-1"
-          >
-            <div class="contact-icon icon-email">📧</div>
-            <div class="contact-info">
-              <div class="contact-label">Email</div>
-              <div class="contact-value">anirudhamajumder68@gmail.com</div>
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <div class="eyebrow"><svg class="icon"><use href="#i-mail" /></svg>Contact</div>
+            <h2>Let's work together</h2>
+            <p>
+              Open to structural engineering, Building Regulations drafting and quantity surveying roles and
+              projects. The quickest way to reach me is by email.
+            </p>
+          </div>
+          <div class="contact-grid reveal">
+            <a class="contact-card tilt" href="mailto:anirudhamajumder68@gmail.com">
+              <svg class="icon"><use href="#i-mail" /></svg>
+              <div><small>Email</small><span>anirudhamajumder68@gmail.com</span></div>
+            </a>
+            <a class="contact-card tilt" href="tel:+8801306596925">
+              <svg class="icon"><use href="#i-phone" /></svg>
+              <div><small>Phone</small><span>+880 1306 596 925</span></div>
+            </a>
+            <a class="contact-card tilt" href="https://linkedin.com/in/anikshekhar" target="_blank" rel="noopener">
+              <svg class="icon"><use href="#i-linkedin" /></svg>
+              <div><small>LinkedIn</small><span>linkedin.com/in/anikshekhar</span></div>
+            </a>
+            <div class="contact-card tilt">
+              <svg class="icon"><use href="#i-pin" /></svg>
+              <div><small>Location</small><span>Sylhet, Bangladesh</span></div>
             </div>
-          </a>
-          <a
-            href="tel:+8801306596925"
-            class="contact-card reveal reveal-delay-2"
-          >
-            <div class="contact-icon icon-phone">📱</div>
-            <div class="contact-info">
-              <div class="contact-label">Phone</div>
-              <div class="contact-value">+880 1306 596925</div>
-            </div>
-          </a>
-          <a
-            href="https://linkedin.com/in/anikshekhar"
-            target="_blank"
-            rel="noopener"
-            class="contact-card reveal reveal-delay-3"
-          >
-            <div class="contact-icon icon-linkedin">💼</div>
-            <div class="contact-info">
-              <div class="contact-label">LinkedIn</div>
-              <div class="contact-value">linkedin.com/in/anikshekhar</div>
-            </div>
-          </a>
-          <div class="contact-card reveal reveal-delay-4">
-            <div class="contact-icon icon-location">📍</div>
-            <div class="contact-info">
-              <div class="contact-label">Location</div>
-              <div class="contact-value">Sylhet, Bangladesh</div>
-            </div>
+          </div>
+          <div class="contact-cta reveal">
+            <a href="Anik_Shekhar_Mazumder_CV.pdf" download class="btn btn-primary">
+              <svg class="icon"><use href="#i-download" /></svg> Download CV (PDF)
+            </a>
+            <a href="mailto:anirudhamajumder68@gmail.com" class="btn btn-outline">
+              <svg class="icon"><use href="#i-mail" /></svg> Email me
+            </a>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
     <footer>
-      <div class="footer-copy">
-        © 2025 <span>Anik Shekhar Mazumder</span>. All rights reserved.
-      </div>
-      <div class="footer-links">
-        <a href="#hero">Back to Top ↑</a>
-        <a href="mailto:anirudhamajumder68@gmail.com">Email</a>
-        <a
-          href="https://linkedin.com/in/anikshekhar"
-          target="_blank"
-          rel="noopener"
-          >LinkedIn</a
-        >
+      <div class="wrap">
+        <span>&copy; 2026 Anik Shekhar Mazumder</span>
+        <a href="#top">Back to top &uarr;</a>
       </div>
     </footer>
 
-    <!-- ─── CERTIFICATE MODAL ──────────────────────────────────── -->
-    <div
-      class="modal-overlay"
-      id="modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-    >
-      <div class="modal-box" id="cert-edge">
-        <button
-          class="modal-close"
-          onclick="closeModal()"
-          aria-label="Close certificate viewer"
-        >
-          ✕
-        </button>
-        <div class="modal-cert-display">
-          <div class="modal-cert-inner">
-            <div class="cert-logos">
-              <div class="cert-logo-placeholder">
-                ICT<br />DIVISION<br /><span style="font-size: 0.45rem"
-                  >FUTURE IS HERE</span
-                >
-              </div>
-              <div class="cert-logo-placeholder" style="background: #1565c0">
-                BANGLADESH<br />COMPUTER<br />COUNCIL<br /><span
-                  style="font-size: 0.45rem"
-                  >COMPUTER FOR EVERYTHING</span
-                >
-              </div>
-              <div class="cert-logo-placeholder red">
-                EDGE<br /><span style="font-size: 0.45rem"
-                  >ENHANCING DIGITAL<br />GOVERNMENT & ECONOMY</span
-                >
-              </div>
-            </div>
-            <div class="modal-cert-heading" id="modal-title">
-              This is to certify that
-            </div>
-            <div class="modal-cert-name">Anik Shekhar Mazumder</div>
-            <div class="modal-cert-body">
-              has successfully completed a training on
-              <strong>"Basic Web Developments"</strong> conducted by the
-              Institute of Information and Communication Technology (IICT),
-              Shahjalal University of Science &amp; Technology from
-              <strong>Dec 2024 to Feb 2025 (60 hours)</strong>, under Enhancing
-              Digital Government and Economy (EDGE) Project of Bangladesh
-              Computer Council, ICT Division.
-            </div>
-            <div class="modal-cert-sigs">
-              <div class="modal-cert-sig">
-                <div class="modal-cert-sig-line"></div>
-                <div class="modal-cert-sig-role">
-                  <strong>Director</strong><br />Institute of Information and
-                  Communication Technology (IICT),<br />Shahjalal University of
-                  Science &amp; Technology, Sylhet
-                </div>
-              </div>
-              <div class="modal-cert-badge">
-                DIGITAL<br />SKILLS4<br />STUDENTS
-              </div>
-              <div class="modal-cert-sig">
-                <div class="modal-cert-sig-line"></div>
-                <div class="modal-cert-sig-role">
-                  <strong>Project Director</strong><br />Enhancing Digital
-                  Government and Economy<br />Bangladesh Computer Council
-                </div>
-              </div>
-            </div>
-            <div class="modal-cert-serial">
-              Date of Issue: 17-May-2025 &nbsp;|&nbsp; Serial No.:
-              EDGE-DSTS-126-8703-00006
-            </div>
-          </div>
-        </div>
+    <!-- ─── Lightbox ───────────────────────────────────────────── -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Work sample viewer">
+      <div class="lb-bar">
+        <span id="lbCount"></span>
+        <button class="lb-btn" id="lbClose" type="button" aria-label="Close viewer">&#10005;</button>
+      </div>
+      <div class="lb-stage" id="lbStage"><img id="lbImg" alt="" draggable="false" /></div>
+      <div class="lb-foot">
+        <button class="lb-btn" id="lbPrev" type="button" aria-label="Previous sample">&#8592;</button>
+        <p id="lbCap"></p>
+        <button class="lb-btn" id="lbNext" type="button" aria-label="Next sample">&#8594;</button>
       </div>
     </div>
 
-    <!-- ─── Scripts ────────────────────────────────────────────── -->
     <script>
-      // Mobile nav toggle
-      const hamburger = document.getElementById("hamburger");
+      // Mobile navigation
+      const navToggle = document.getElementById("navToggle");
       const navLinks = document.getElementById("navLinks");
-      hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("open");
+      navToggle.addEventListener("click", () => {
+        const open = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(open));
       });
-      // Close nav on link click
-      navLinks.querySelectorAll("a").forEach((a) => {
-        a.addEventListener("click", () => navLinks.classList.remove("open"));
-      });
+      navLinks.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        }),
+      );
 
       // Scroll reveal
       const reveals = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("visible");
-              observer.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.12 },
-      );
-      reveals.forEach((el) => observer.observe(el));
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+        );
+        reveals.forEach((el) => io.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add("visible"));
+      }
 
-      // Modal
-      function openModal(id) {
-        document.getElementById("modal-overlay").classList.add("open");
-        document.body.style.overflow = "hidden";
-      }
-      function closeModal() {
-        document.getElementById("modal-overlay").classList.remove("open");
-        document.body.style.overflow = "";
-      }
-      // Close on overlay click
-      document
-        .getElementById("modal-overlay")
-        .addEventListener("click", function (e) {
-          if (e.target === this) closeModal();
+      // Active navigation link
+      const sections = [...document.querySelectorAll("main section[id]")];
+      const navAs = [...navLinks.querySelectorAll('a[href^="#"]')];
+      const setActive = () => {
+        const y = window.scrollY + 140;
+        let current = "";
+        sections.forEach((s) => {
+          if (s.offsetTop <= y) current = s.id;
         });
-      // Close on Esc
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeModal();
-      });
+        navAs.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + current));
+      };
+      window.addEventListener("scroll", setActive, { passive: true });
+      setActive();
 
-      // Active nav link highlight on scroll
-      const sections = document.querySelectorAll("section[id]");
-      const navAs = document.querySelectorAll(".nav-links a");
-      window.addEventListener(
-        "scroll",
-        () => {
-          let current = "";
-          sections.forEach((sec) => {
-            if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+      // 3D tilt on cards and a parallax portrait (mouse devices only)
+      const canTilt =
+        window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (canTilt) {
+        document.querySelectorAll(".tilt").forEach((el) => {
+          el.addEventListener("pointermove", (e) => {
+            const r = el.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width;
+            const py = (e.clientY - r.top) / r.height;
+            const max = Math.min(3.5, 1200 / r.width);
+            el.classList.add("tilting");
+            el.style.transform =
+              "perspective(900px) rotateX(" + ((0.5 - py) * max).toFixed(2) + "deg) rotateY(" +
+              ((px - 0.5) * max).toFixed(2) + "deg) translateY(-2px)";
+            el.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+            el.style.setProperty("--my", (py * 100).toFixed(1) + "%");
           });
-          navAs.forEach((a) => {
-            a.style.color =
-              a.getAttribute("href") === `#${current}` ? "var(--accent)" : "";
+          el.addEventListener("pointerleave", () => {
+            el.classList.remove("tilting");
+            el.style.transform = "";
           });
-        },
-        { passive: true },
+        });
+        const hero = document.querySelector(".hero");
+        const heroVisual = document.getElementById("heroVisual");
+        hero.addEventListener("pointermove", (e) => {
+          const x = e.clientX / window.innerWidth - 0.5;
+          const y = e.clientY / window.innerHeight - 0.5;
+          heroVisual.style.transform = "rotateY(" + (x * 12).toFixed(2) + "deg) rotateX(" + (-y * 9).toFixed(2) + "deg)";
+        });
+        hero.addEventListener("pointerleave", () => {
+          heroVisual.style.transform = "";
+        });
+      }
+
+      // Deter saving of work samples: no context menu, drag or copy on them
+      const guarded = (e) => e.target.closest && e.target.closest(".shot, .lightbox");
+      ["contextmenu", "dragstart", "copy"].forEach((type) =>
+        document.addEventListener(type, (e) => {
+          if (guarded(e)) e.preventDefault();
+        }),
       );
+
+      // Lightbox for work samples
+      const shots = [...document.querySelectorAll(".shot")];
+      const lb = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      const lbCap = document.getElementById("lbCap");
+      const lbCount = document.getElementById("lbCount");
+      let lbIndex = 0;
+      let lbOpener = null;
+
+      function showShot(i) {
+        lbIndex = (i + shots.length) % shots.length;
+        const s = shots[lbIndex];
+        const thumb = s.querySelector("img");
+        lbImg.src = s.dataset.full;
+        lbImg.alt = thumb.alt;
+        const title = s.querySelector(".shot-cap b").textContent.trim();
+        const detail = s.querySelector(".shot-cap").textContent.replace(/\s+/g, " ").trim().slice(title.length).trim();
+        lbCap.textContent = title + ": " + detail;
+        lbCount.textContent = "Sample " + (lbIndex + 1) + " of " + shots.length + " · portfolio sample, not for reuse";
+      }
+      function openLb(i) {
+        lbOpener = shots[i];
+        showShot(i);
+        lb.classList.add("open");
+        document.body.style.overflow = "hidden";
+        document.getElementById("lbClose").focus();
+      }
+      function closeLb() {
+        lb.classList.remove("open");
+        document.body.style.overflow = "";
+        if (lbOpener) lbOpener.focus();
+      }
+      shots.forEach((s, i) => s.addEventListener("click", () => openLb(i)));
+      document.getElementById("lbClose").addEventListener("click", closeLb);
+      document.getElementById("lbPrev").addEventListener("click", () => showShot(lbIndex - 1));
+      document.getElementById("lbNext").addEventListener("click", () => showShot(lbIndex + 1));
+      lb.addEventListener("click", (e) => {
+        if (e.target === lb) closeLb();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") closeLb();
+        if (e.key === "ArrowLeft") showShot(lbIndex - 1);
+        if (e.key === "ArrowRight") showShot(lbIndex + 1);
+      });
+    </script>
+
+    <script>
+      // ─── 3D structural scene ────────────────────────────────────
+      // A six-storey steel frame is erected member by member on its setting-out
+      // grid, served by a tower crane. The model is real 3D geometry in metres,
+      // projected in perspective; the camera sways slowly and turns as you scroll.
+      (function () {
+        const cv = document.getElementById("ceBg");
+        if (!cv || !cv.getContext) return;
+        const ctx = cv.getContext("2d");
+        const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const STEEL = "150, 178, 205";
+        const BRASS = "200, 164, 92";
+
+        // Model. x runs along the building, z across it, y is up.
+        const BX = 4, BZ = 2, BAY = 6, STOREY = 3.6, FLOORS = 6;
+        const X0 = -(BX * BAY) / 2, Z0 = -(BZ * BAY) / 2;
+        const TOP = FLOORS * STOREY;
+        const gx = (i) => X0 + i * BAY;
+        const gz = (j) => Z0 + j * BAY;
+        const CR = { x: X0 - 5.5, z: 0, h: TOP + 11, jib: 24, cj: 8, m: 0.9 };
+        const DIST = 80; // camera distance
+        const TARGET_Y = 14; // height the camera looks at
+        const GAP = 0.11; // seconds between members
+        const DUR = 0.7; // seconds to place one member
+
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        const ease = (p) => 1 - Math.pow(1 - p, 3);
+
+        // Members in erection order: columns, beams, then bracing, floor by floor
+        const members = [];
+        const add = (a, b, alpha, w) => members.push({ a, b, alpha, w });
+        for (let s = 0; s < FLOORS; s++) {
+          const y0 = s * STOREY, y1 = y0 + STOREY;
+          for (let i = 0; i <= BX; i++)
+            for (let j = 0; j <= BZ; j++) {
+              const edge = i === 0 || i === BX || j === 0 || j === BZ;
+              add([gx(i), y0, gz(j)], [gx(i), y1, gz(j)], edge ? 0.52 : 0.3, 1.5);
+            }
+          for (let j = 0; j <= BZ; j++)
+            for (let i = 0; i < BX; i++) add([gx(i), y1, gz(j)], [gx(i + 1), y1, gz(j)], j === 0 || j === BZ ? 0.44 : 0.22, 1.2);
+          for (let i = 0; i <= BX; i++)
+            for (let j = 0; j < BZ; j++) add([gx(i), y1, gz(j)], [gx(i), y1, gz(j + 1)], i === 0 || i === BX ? 0.44 : 0.22, 1.2);
+          const b1 = s % 2 === 0 ? 1 : 2, b2 = BX - 1 - b1;
+          add([gx(b1), y0, gz(0)], [gx(b1 + 1), y1, gz(0)], 0.27, 1);
+          add([gx(b1 + 1), y0, gz(0)], [gx(b1), y1, gz(0)], 0.27, 1);
+          add([gx(b2), y0, gz(BZ)], [gx(b2 + 1), y1, gz(BZ)], 0.27, 1);
+          add([gx(b2 + 1), y0, gz(BZ)], [gx(b2), y1, gz(BZ)], 0.27, 1);
+        }
+        const PER = members.length / FLOORS;
+        const buildDur = members.length * GAP + DUR;
+
+        let W = 0, H = 0, F = 0, cx = 0, cy = 0, small = false;
+        let raf = 0, lastDraw = 0, clock = 0;
+        let sa = 0, ca = 1, se = 0, ce = 1;
+        let scrollT = 0, scrollS = 0;
+        const ptr = { x: 0, y: 0, tx: 0, ty: 0 };
+        const hook = { y: CR.h - 6 };
+
+        function setCam(az, el) {
+          sa = Math.sin(az);
+          ca = Math.cos(az);
+          se = Math.sin(el);
+          ce = Math.cos(el);
+        }
+        // world point -> [screen x, screen y, depth]
+        function P(x, y, z) {
+          y -= TARGET_Y;
+          const x1 = x * ca - z * sa, z1 = x * sa + z * ca;
+          const d = DIST - y * se + z1 * ce;
+          const k = F / d;
+          return [cx + x1 * k, cy - (y * ce + z1 * se) * k, d];
+        }
+        const fog = (d) => 1 - 0.55 * clamp((d - (DIST - 24)) / 50, 0, 1);
+
+        function seg(a, b, rgb, alpha, w) {
+          if (a[2] < 8 || b[2] < 8) return;
+          ctx.strokeStyle = "rgba(" + rgb + ", " + (alpha * fog((a[2] + b[2]) / 2)).toFixed(3) + ")";
+          ctx.lineWidth = w;
+          ctx.beginPath();
+          ctx.moveTo(a[0], a[1]);
+          ctx.lineTo(b[0], b[1]);
+          ctx.stroke();
+        }
+        function poly(pts, rgb, strokeA, fillA) {
+          ctx.beginPath();
+          for (let i = 0; i < pts.length; i++) {
+            if (pts[i][2] < 8) return;
+            if (i) ctx.lineTo(pts[i][0], pts[i][1]);
+            else ctx.moveTo(pts[i][0], pts[i][1]);
+          }
+          ctx.closePath();
+          if (fillA) {
+            ctx.fillStyle = "rgba(" + rgb + ", " + fillA + ")";
+            ctx.fill();
+          }
+          if (strokeA) {
+            ctx.strokeStyle = "rgba(" + rgb + ", " + strokeA + ")";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+        function text(str, x, y, rgb, alpha, align) {
+          ctx.fillStyle = "rgba(" + rgb + ", " + alpha + ")";
+          ctx.textAlign = align || "center";
+          ctx.fillText(str, x, y);
+        }
+
+        function layout() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          W = window.innerWidth;
+          H = window.innerHeight;
+          cv.width = Math.round(W * dpr);
+          cv.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          small = W < 900;
+          F = clamp(Math.min(H * 1.5, W * (small ? 2.4 : 1.1)), 480, 1900);
+          const scale = F / DIST;
+          cy = H * (small ? 0.6 : 0.56);
+          cx = W / 2 + 2.5 * scale;
+          if (!small) {
+            // stand the crane in the clear space between the hero text and the portrait
+            const txt = document.querySelector(".hero-summary");
+            const vis = document.querySelector(".hero-visual");
+            if (txt && vis) {
+              const gapMid = (txt.getBoundingClientRect().right + vis.getBoundingClientRect().left) / 2;
+              cx = clamp(gapMid + 15.2 * scale, W * 0.5, W * 0.8);
+            }
+          }
+          onScroll();
+        }
+
+        function onScroll() {
+          const max = Math.max(1, document.documentElement.scrollHeight - H);
+          scrollT = clamp(window.scrollY / max, 0, 1);
+          const base = small ? 0.5 : 1;
+          const rest = small ? 0.22 : 0.3;
+          cv.style.opacity = (base - (base - rest) * clamp(window.scrollY / (H * 0.6), 0, 1)).toFixed(3);
+        }
+
+        function drawGround(tt) {
+          // setting-out grid on the ground plane, fading with distance from the building
+          const R = small ? 30 : 42;
+          for (let g = -R; g <= R; g += BAY) {
+            for (let t = -R; t < R; t += BAY) {
+              const a = 0.19 * (1 - Math.hypot(g, t + BAY / 2) / (R * 1.05));
+              if (a <= 0.012) continue;
+              seg(P(g, 0, t), P(g, 0, t + BAY), STEEL, a, 1);
+              seg(P(t, 0, g), P(t + BAY, 0, g), STEEL, a, 1);
+            }
+          }
+          // pad foundations
+          const f = 0.95;
+          for (let i = 0; i <= BX; i++)
+            for (let j = 0; j <= BZ; j++) {
+              const x = gx(i), z = gz(j);
+              poly([P(x - f, 0, z - f), P(x + f, 0, z - f), P(x + f, 0, z + f), P(x - f, 0, z + f)], STEEL, 0.26, 0.03);
+            }
+          if (small) return;
+          const intro = clamp((tt - 0.6) / 1.4, 0, 1);
+          if (intro <= 0) return;
+          // grid bubbles: A-E along the front, 1-3 down the side
+          const zb = Z0 - 8, xb = gx(BX) + 8;
+          const bubble = (p, label) => {
+            const r = clamp((1.3 * F) / p[2], 7, 13);
+            ctx.strokeStyle = "rgba(" + STEEL + ", " + 0.42 * intro + ")";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(p[0], p[1], r, 0, Math.PI * 2);
+            ctx.stroke();
+            text(label, p[0], p[1] + 3.5, BRASS, 0.8 * intro);
+          };
+          ctx.setLineDash([9, 3, 2, 3]);
+          for (let i = 0; i <= BX; i++) seg(P(gx(i), 0, Z0 - 1.6), P(gx(i), 0, zb + 1.4), STEEL, 0.3 * intro, 1);
+          for (let j = 0; j <= BZ; j++) seg(P(gx(BX) + 1.6, 0, gz(j)), P(xb - 1.4, 0, gz(j)), STEEL, 0.3 * intro, 1);
+          ctx.setLineDash([]);
+          for (let i = 0; i <= BX; i++) bubble(P(gx(i), 0, zb), "ABCDE"[i]);
+          for (let j = 0; j <= BZ; j++) bubble(P(xb, 0, gz(j)), String(j + 1));
+          // bay dimension chain along the front
+          const zd = Z0 - 4.2;
+          seg(P(gx(0), 0, zd), P(gx(BX), 0, zd), STEEL, 0.34 * intro, 1);
+          for (let i = 0; i <= BX; i++) {
+            seg(P(gx(i) - 0.45, 0, zd + 0.45), P(gx(i) + 0.45, 0, zd - 0.45), BRASS, 0.7 * intro, 1.2);
+            if (i < BX) {
+              const m = P(gx(i) + BAY / 2, 0, zd);
+              text("6000", m[0], m[1] - 5, STEEL, 0.5 * intro);
+            }
+          }
+        }
+
+        function drawFrame(tt) {
+          // floor decks, as each storey completes
+          for (let s = 0; s < FLOORS; s++) {
+            const done = clamp((tt - (s + 1) * PER * GAP) / 1.2, 0, 1);
+            if (done <= 0) break;
+            const y = (s + 1) * STOREY;
+            poly([P(gx(0), y, gz(0)), P(gx(BX), y, gz(0)), P(gx(BX), y, gz(BZ)), P(gx(0), y, gz(BZ))], STEEL, 0, 0.032 * done);
+          }
+          for (let i = 0; i < members.length; i++) {
+            const p = (tt - i * GAP) / DUR;
+            if (p <= 0) break;
+            const m = members[i];
+            const a = P(m.a[0], m.a[1], m.a[2]);
+            if (p < 1) {
+              const e = ease(p);
+              const b = P(m.a[0] + (m.b[0] - m.a[0]) * e, m.a[1] + (m.b[1] - m.a[1]) * e, m.a[2] + (m.b[2] - m.a[2]) * e);
+              seg(a, b, BRASS, 0.9, 1.6);
+              ctx.fillStyle = "rgba(" + BRASS + ", 0.9)";
+              ctx.beginPath();
+              ctx.arc(b[0], b[1], 2.2, 0, Math.PI * 2);
+              ctx.fill();
+            } else {
+              seg(a, P(m.b[0], m.b[1], m.b[2]), STEEL, m.alpha, m.w);
+            }
+          }
+          if (small) return;
+          // finished floor levels, called up at the back corner
+          for (let s = 0; s < FLOORS; s++) {
+            const done = clamp((tt - ((s + 1) * PER - 4) * GAP) / 1, 0, 1);
+            if (done <= 0) break;
+            const lvl = (s + 1) * STOREY;
+            const p = P(gx(BX), lvl, gz(BZ));
+            ctx.strokeStyle = "rgba(" + STEEL + ", " + 0.4 * done + ")";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p[0] + 5, p[1]);
+            ctx.lineTo(p[0] + 20, p[1]);
+            ctx.stroke();
+            ctx.strokeStyle = "rgba(" + BRASS + ", " + 0.75 * done + ")";
+            ctx.beginPath();
+            ctx.moveTo(p[0] + 8, p[1] - 6);
+            ctx.lineTo(p[0] + 16, p[1] - 6);
+            ctx.lineTo(p[0] + 12, p[1] - 0.5);
+            ctx.closePath();
+            ctx.stroke();
+            text("+" + lvl.toFixed(3), p[0] + 25, p[1] + 3.5, STEEL, 0.55 * done, "left");
+          }
+        }
+
+        function drawCrane(tt, dt) {
+          const { x: mx, z: mz, h: Hm, jib: L, cj, m } = CR;
+          const a = 0.44;
+          // mast: four legs, laced
+          const cn = [[-m, -m], [m, -m], [m, m], [-m, m]];
+          const n = Math.round(Hm / 3.2), sh = Hm / n;
+          for (let c = 0; c < 4; c++) seg(P(mx + cn[c][0], 0, mz + cn[c][1]), P(mx + cn[c][0], Hm, mz + cn[c][1]), STEEL, a, 1.2);
+          for (let k = 0; k < n; k++) {
+            const y0 = k * sh, y1 = y0 + sh;
+            for (let c = 0; c < 4; c++) {
+              const p = cn[c], q = cn[(c + 1) % 4];
+              seg(P(mx + p[0], y1, mz + p[1]), P(mx + q[0], y1, mz + q[1]), STEEL, a * 0.5, 1);
+              const flip = (k + c) % 2 === 0;
+              const lo = flip ? p : q, hi = flip ? q : p;
+              seg(P(mx + lo[0], y0, mz + lo[1]), P(mx + hi[0], y1, mz + hi[1]), STEEL, a * 0.42, 1);
+            }
+          }
+          poly([P(mx - 2, 0, mz - 2), P(mx + 2, 0, mz - 2), P(mx + 2, 0, mz + 2), P(mx - 2, 0, mz + 2)], STEEL, 0.3, 0.035);
+
+          // slewing jib: u along the jib, v across it
+          const phi = still ? 0.22 : 0.42 * Math.sin(clock * 0.1 + 0.5);
+          const cf = Math.cos(phi), sf = Math.sin(phi);
+          const J = (u, y, v) => P(mx + u * cf - v * sf, y, mz + u * sf + v * cf);
+          const jw = 0.7, jh = 1.6, N = 10, pan = L / N;
+          seg(J(-cj, Hm, -jw), J(L, Hm, -jw), STEEL, a, 1.2);
+          seg(J(-cj, Hm, jw), J(L, Hm, jw), STEEL, a, 1.2);
+          seg(J(0, Hm + jh, 0), J(L - pan, Hm + jh, 0), STEEL, a, 1.1);
+          seg(J(L - pan, Hm + jh, 0), J(L, Hm, 0), STEEL, a, 1.1);
+          for (let k = 0; k < N; k++) {
+            const u0 = k * pan, u1 = u0 + pan;
+            seg(J(u1, Hm, -jw), J(u1, Hm, jw), STEEL, a * 0.5, 1);
+            if (k < N - 1) {
+              seg(J(u0, Hm + jh, 0), J(u1, Hm, -jw), STEEL, a * 0.42, 1);
+              seg(J(u0, Hm + jh, 0), J(u1, Hm, jw), STEEL, a * 0.42, 1);
+              seg(J(u1, Hm + jh, 0), J(u1, Hm, -jw), STEEL, a * 0.3, 1);
+              seg(J(u1, Hm + jh, 0), J(u1, Hm, jw), STEEL, a * 0.3, 1);
+            }
+          }
+          // counter-jib ties and counterweight
+          for (let u = -cj; u < 0; u += cj / 3) seg(J(u, Hm, -jw), J(u, Hm, jw), STEEL, a * 0.5, 1);
+          const w0 = -cj + 0.3, w1 = -cj + 2.6, wy0 = Hm - 2, wy1 = Hm - 0.2, wv = 0.9;
+          poly([J(w0, wy0, -wv), J(w1, wy0, -wv), J(w1, wy1, -wv), J(w0, wy1, -wv)], STEEL, a * 0.8, 0.05);
+          poly([J(w0, wy0, wv), J(w1, wy0, wv), J(w1, wy1, wv), J(w0, wy1, wv)], STEEL, a * 0.8, 0.05);
+          seg(J(w0, wy0, -wv), J(w0, wy0, wv), STEEL, a * 0.6, 1);
+          seg(J(w1, wy0, -wv), J(w1, wy0, wv), STEEL, a * 0.6, 1);
+          // tower head and pendant ties
+          const apex = J(0, Hm + 5.4, 0);
+          for (let c = 0; c < 4; c++) seg(J(cn[c][0], Hm, cn[c][1]), apex, STEEL, a, 1.1);
+          seg(apex, J(L * 0.56, Hm + jh, 0), STEEL, a * 0.7, 1);
+          seg(apex, J(-cj, Hm, 0), STEEL, a * 0.7, 1);
+          ctx.fillStyle = "rgba(" + BRASS + ", 0.85)";
+          ctx.beginPath();
+          ctx.arc(apex[0], apex[1], 2, 0, Math.PI * 2);
+          ctx.fill();
+
+          // trolley, hoist rope and load
+          const r = still ? 15 : 14 + 6 * Math.sin(clock * 0.073 + 1.3);
+          const building = tt < buildDur - DUR;
+          let target = Hm - 6, carrying = false;
+          if (building) {
+            const per = PER * GAP;
+            const storey = Math.min(FLOORS - 1, Math.floor(tt / per));
+            const phase = (tt / per) % 1;
+            if (phase < 0.62) target = (storey + 1) * STOREY + 2.4;
+            carrying = phase < 0.5;
+          }
+          hook.y += (target - hook.y) * (still ? 1 : 1 - Math.exp(-dt * 1.5));
+          poly([J(r - 0.8, Hm, -jw), J(r + 0.8, Hm, -jw), J(r + 0.8, Hm, jw), J(r - 0.8, Hm, jw)], BRASS, 0.75, 0.1);
+          const hx = mx + r * cf, hz = mz + r * sf;
+          const top = J(r, Hm, 0), hk = P(hx, hook.y, hz);
+          seg(top, hk, STEEL, 0.42, 1);
+          ctx.fillStyle = "rgba(" + BRASS + ", 0.85)";
+          ctx.fillRect(hk[0] - 2, hk[1] - 1, 4, 5); // hook block
+          if (carrying) {
+            const by = hook.y - 2;
+            const l = P(hx - 2.6, by, hz), rr = P(hx + 2.6, by, hz);
+            seg(hk, P(hx - 1.8, by, hz), STEEL, 0.42, 1);
+            seg(hk, P(hx + 1.8, by, hz), STEEL, 0.42, 1);
+            seg(l, rr, BRASS, 0.9, 2.2);
+          }
+        }
+
+        function render(dt) {
+          ctx.clearRect(0, 0, W, H);
+          scrollS += (scrollT - scrollS) * (still ? 1 : 0.07);
+          ptr.x += (ptr.tx - ptr.x) * 0.05;
+          ptr.y += (ptr.ty - ptr.y) * 0.05;
+          const sway = still ? 0 : 0.2 * Math.sin(clock * 0.055);
+          setCam(-0.5 + sway - 0.5 * scrollS + ptr.x * 0.1, 0.3 + 0.1 * scrollS - ptr.y * 0.04);
+          ctx.font = "500 10px 'IBM Plex Mono', Consolas, monospace";
+          ctx.lineCap = "round";
+          const tt = still ? 1e6 : clock;
+          drawGround(tt);
+          drawFrame(tt);
+          drawCrane(tt, dt);
+        }
+
+        function frame(now) {
+          raf = requestAnimationFrame(frame);
+          const el = now - lastDraw;
+          if (el < 30) return; // ~30 fps is plenty for slow motion
+          lastDraw = now;
+          const dt = Math.min(0.06, el / 1000);
+          clock += dt;
+          render(dt);
+        }
+        function start() {
+          cancelAnimationFrame(raf);
+          if (still) {
+            render(0);
+            return;
+          }
+          lastDraw = performance.now();
+          raf = requestAnimationFrame(frame);
+        }
+
+        let resizeTimer = 0;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            layout();
+            start();
+          }, 120);
+        });
+        window.addEventListener("scroll", () => {
+          onScroll();
+          if (still) render(0);
+        }, { passive: true });
+        if (!still && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+          window.addEventListener("pointermove", (e) => {
+            ptr.tx = e.clientX / W - 0.5;
+            ptr.ty = e.clientY / H - 0.5;
+          }, { passive: true });
+        }
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) cancelAnimationFrame(raf);
+          else start();
+        });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+        layout();
+        start();
+      })();
     </script>
   </body>
 </html>
